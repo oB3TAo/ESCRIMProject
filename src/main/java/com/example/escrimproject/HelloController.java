@@ -71,17 +71,17 @@ public class HelloController implements Initializable {
         items = txtItems.getText();
         try
         {
-            pst = con.prepareStatement("insert into registration(name,role,items)values(?,?,?)");
+            pst = con.prepareStatement("insert into personnel(name,role,items)values(?,?,?)");
             pst.setString(1, stname);
             pst.setString(2, role);
             pst.setString(3, items);
             pst.executeUpdate();
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Personnel Registration");
+            alert.setTitle("Personnel personnel");
 
 
-            alert.setHeaderText("Personnel Registration");
+            alert.setHeaderText("Personnel personnel");
             alert.setContentText("Record Added!");
 
             alert.showAndWait();
@@ -106,7 +106,7 @@ public class HelloController implements Initializable {
         ObservableList<Personnel> personnels = FXCollections.observableArrayList();
         try
         {
-            pst = con.prepareStatement("select id,name,role,items from registration");
+            pst = con.prepareStatement("select id,name,role,items from personnel");
             ResultSet rs = pst.executeQuery();
             {
                 while (rs.next())
@@ -166,15 +166,15 @@ public class HelloController implements Initializable {
 
         try
         {
-            pst = con.prepareStatement("delete from registration where id = ? ");
+            pst = con.prepareStatement("delete from personnel where id = ? ");
             pst.setInt(1, id);
             pst.executeUpdate();
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Personnel Registration");
+            alert.setTitle("Personnel personnel");
 
 
-            alert.setHeaderText("Personnel Registration");
+            alert.setHeaderText("Personnel personnel");
             alert.setContentText("Deleted!");
 
             alert.showAndWait();
@@ -200,17 +200,17 @@ public class HelloController implements Initializable {
         items = txtItems.getText();
         try
         {
-            pst = con.prepareStatement("update registration set name = ?,role = ? ,items = ? where id = ? ");
+            pst = con.prepareStatement("update personnel set name = ?,role = ? ,items = ? where id = ? ");
             pst.setString(1, stname);
             pst.setString(2, role);
             pst.setString(3, items);
             pst.setInt(4, id);
             pst.executeUpdate();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Personnel Registration");
+            alert.setTitle("Personnel personnel");
 
 
-            alert.setHeaderText("Personnel Registration");
+            alert.setHeaderText("Personnel personnel");
             alert.setContentText("Updated!");
 
             alert.showAndWait();
@@ -233,7 +233,7 @@ public class HelloController implements Initializable {
     public void Connect()
     {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/escrim","root","MySQL_B3TA90");
         } catch (ClassNotFoundException ex) {
 
