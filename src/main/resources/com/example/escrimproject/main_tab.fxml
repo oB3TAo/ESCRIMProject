@@ -10,17 +10,17 @@
             <tabs>
                 <Tab text="Colis">
                     <content>
-                        <fx:include fx:id="colisTabContent" source="colis_tab.fxml" />
+                        <fx:include fx:id="colisTabContent" source="tab/colis_tab.fxml" />
                     </content>
                 </Tab>
                 <Tab text="Matériels">
                     <content>
-                        <fx:include fx:id="materielsTabContent" source="materiels_tab.fxml" />
+                        <fx:include fx:id="materielsTabContent" source="tab/materiels_tab.fxml" />
                     </content>
                 </Tab>
                 <Tab text="Commandes">
                     <content>
-                        <fx:include fx:id="commandesTabContent" source="commandes_tab.fxml" />
+                        <fx:include fx:id="commandesTabContent" source="tab/commandes_tab.fxml" />
                     </content>
                 </Tab>
                 <Tab text="Personnel">
