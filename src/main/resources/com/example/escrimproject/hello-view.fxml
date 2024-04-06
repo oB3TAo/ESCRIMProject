@@ -10,61 +10,67 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="802.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escrimproject.HelloController">
-   <children>
-      <Label layoutX="264.0" layoutY="14.0" text="Personnel Items">
-         <font>
-            <Font size="39.0" />
-         </font>
-      </Label>
-      <Pane layoutX="27.0" layoutY="109.0" prefHeight="252.0" prefWidth="262.0" style="-fx-background-color: lightgrey;">
-         <children>
-            <Label layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="80.0" text="Name">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
-            <Label layoutX="14.0" layoutY="110.0" prefHeight="32.0" prefWidth="80.0" text="Role">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
-            <Label layoutX="14.0" layoutY="206.0" prefHeight="32.0" prefWidth="80.0" text="Items">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txtName" layoutX="99.0" layoutY="18.0" />
-            <TextField fx:id="txtRole" layoutX="99.0" layoutY="114.0" />
-            <TextField fx:id="txtItems" layoutX="99.0" layoutY="210.0" />
-         </children>
-      </Pane>
-      <TableView fx:id="table" layoutX="337.0" layoutY="109.0" prefHeight="252.0" prefWidth="451.0">
-        <columns>
-          <TableColumn fx:id="IDColmn" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="NameColmn" prefWidth="75.0" text="Name" />
-            <TableColumn fx:id="RoleColmn" prefWidth="75.0" text="Role" />
-            <TableColumn fx:id="ItemsColmn" prefWidth="75.0" text="Items" />
-        </columns>
-      </TableView>
-      <ButtonBar layoutX="158.0" layoutY="406.0" prefHeight="40.0" prefWidth="451.0">
-         <buttons>
-            <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#Add" prefHeight="70.0" prefWidth="138.0" text="Add">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#Update" prefHeight="70.0" prefWidth="149.0" text="Update">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Button>
-            <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#Delete" prefHeight="70.0" prefWidth="149.0" text="Delete">
-               <font>
-                  <Font size="19.0" />
-               </font>
-            </Button>
-         </buttons>
-      </ButtonBar>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0"
+            prefWidth="802.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.escrimproject.HelloController">
+    <children>
+        <Label layoutX="264.0" layoutY="14.0" text="Personnel Items">
+            <font>
+                <Font size="39.0"/>
+            </font>
+        </Label>
+        <Pane layoutX="27.0" layoutY="109.0" prefHeight="252.0" prefWidth="262.0"
+              style="-fx-background-color: lightgrey;">
+            <children>
+                <Label layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="80.0" text="Name">
+                    <font>
+                        <Font size="22.0"/>
+                    </font>
+                </Label>
+                <Label layoutX="14.0" layoutY="110.0" prefHeight="32.0" prefWidth="80.0" text="Role">
+                    <font>
+                        <Font size="22.0"/>
+                    </font>
+                </Label>
+                <Label layoutX="14.0" layoutY="206.0" prefHeight="32.0" prefWidth="80.0" text="Items">
+                    <font>
+                        <Font size="22.0"/>
+                    </font>
+                </Label>
+                <TextField fx:id="txtName" layoutX="99.0" layoutY="18.0"/>
+                <TextField fx:id="txtRole" layoutX="99.0" layoutY="114.0"/>
+                <TextField fx:id="txtItems" layoutX="99.0" layoutY="210.0"/>
+            </children>
+        </Pane>
+        <TableView fx:id="table" layoutX="337.0" layoutY="109.0" prefHeight="252.0" prefWidth="451.0">
+            <columns>
+                <TableColumn fx:id="IDColmn" prefWidth="75.0" text="ID"/>
+                <TableColumn fx:id="NameColmn" prefWidth="75.0" text="Name"/>
+                <TableColumn fx:id="RoleColmn" prefWidth="75.0" text="Role"/>
+                <TableColumn fx:id="ItemsColmn" prefWidth="75.0" text="Items"/>
+            </columns>
+        </TableView>
+        <ButtonBar layoutX="158.0" layoutY="406.0" prefHeight="40.0" prefWidth="451.0">
+            <buttons>
+                <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#Add" prefHeight="70.0" prefWidth="138.0"
+                        text="Add">
+                    <font>
+                        <Font size="19.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#Update" prefHeight="70.0" prefWidth="149.0"
+                        text="Update">
+                    <font>
+                        <Font size="19.0"/>
+                    </font>
+                </Button>
+                <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#Delete" prefHeight="70.0" prefWidth="149.0"
+                        text="Delete">
+                    <font>
+                        <Font size="19.0"/>
+                    </font>
+                </Button>
+            </buttons>
+        </ButtonBar>
+    </children>
 </AnchorPane>

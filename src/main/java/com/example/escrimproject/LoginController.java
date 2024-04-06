@@ -46,7 +46,7 @@ public class LoginController {
             // Load the main view
             Parent root = null;
             try {
-                root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+                root = FXMLLoader.load(getClass().getResource("main_tab.fxml"));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
