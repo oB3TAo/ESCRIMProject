@@ -30,7 +30,7 @@ public class LoginController {
     @FXML
     private void initialize() {
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/escrim", "root", "MySQL_B3TA90");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/escrim", "root", "GtAlMsS=32=460M");
         } catch (SQLException e) {
             e.printStackTrace();
         }
