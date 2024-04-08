@@ -15,4 +15,6 @@ module com.example.escrimproject {
 
     opens com.example.escrimproject to javafx.fxml;
     exports com.example.escrimproject;
+    exports com.example.escrimproject.architecture;
+    opens com.example.escrimproject.architecture to javafx.fxml;
 }

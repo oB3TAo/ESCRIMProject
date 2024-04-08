@@ -1,4 +1,4 @@
-package com.example.escrimproject;
+package com.example.escrimproject.architecture;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
