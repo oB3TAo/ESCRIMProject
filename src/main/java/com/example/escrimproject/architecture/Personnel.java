@@ -8,6 +8,7 @@ public abstract class Personnel {
     private final StringProperty email;
     private final StringProperty telephone;
     private final StringProperty statut;
+    private final StringProperty type;
 
     public Personnel() {
         id = new SimpleIntegerProperty();
@@ -15,7 +16,7 @@ public abstract class Personnel {
         email = new SimpleStringProperty();
         telephone = new SimpleStringProperty();
         statut = new SimpleStringProperty();
-
+        type = new SimpleStringProperty();
     }
 
     public IntegerProperty idProperty() {
@@ -76,6 +77,17 @@ public abstract class Personnel {
 
     public void setStatut(String newStatut) {
         statut.set(newStatut);
+    }
+
+    public String getType() {
+        return type.get();
+    }
+
+    public StringProperty typeProperty() {
+        return type;
+    }
+    public void setType(String newType) {
+        type.set(newType);
     }
 
 }

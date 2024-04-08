@@ -1,44 +1,70 @@
 package com.example.escrimproject.architecture;
 
-public abstract class Produit {
-    private String nom;
-    private Categorie categorie;
-    private float poids;
-    private float quantite;
+import javafx.beans.property.FloatProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
-    // Getters and setters
-    public String getNom() {
+public abstract class Produit {
+    private final IntegerProperty id;
+    private final StringProperty nom;
+    private final FloatProperty poids;
+    private final FloatProperty quantite;
+
+    public Produit() {
+        this.id = new SimpleIntegerProperty();
+        this.nom = new SimpleStringProperty();
+        this.poids = new SimpleFloatProperty();
+        this.quantite = new SimpleFloatProperty();
+    }
+
+    public IntegerProperty idProperty() {
+        return id;
+    }
+
+    public int getId() {
+        return id.get();
+    }
+
+    public void setId(int id) {
+        this.id.set(id);
+    }
+
+    public StringProperty nomProperty() {
         return nom;
     }
 
+    public String getNom() {
+        return nom.get();
+    }
+
     public void setNom(String nom) {
-        this.nom = nom;
+        this.nom.set(nom);
     }
 
-    public Categorie getCategorie() {
-        return categorie;
-    }
-
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
-    }
-
-    public float getPoids() {
+    public FloatProperty poidsProperty() {
         return poids;
     }
 
-    public void setPoids(float poids) {
-        this.poids = poids;
+    public float getPoids() {
+        return poids.get();
     }
 
-    public float getQuantite() {
+    public void setPoids(float poids) {
+        this.poids.set(poids);
+    }
+
+    public FloatProperty quantiteProperty() {
         return quantite;
     }
 
-    public void setQuantite(float quantite) {
-        this.quantite = quantite;
+    public float getQuantite() {
+        return quantite.get();
     }
 
-    // You may want to add abstract methods here that `Medicament` and `Materiel` must implement
+    public void setQuantite(float quantite) {
+        this.quantite.set(quantite);
+    }
 }
-

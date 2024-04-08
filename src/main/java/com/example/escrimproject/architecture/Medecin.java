@@ -8,7 +8,9 @@ public class Medecin extends Personnel {
     private final StringProperty specialite;
 
     public Medecin() {
-        this.specialite = new SimpleStringProperty();
+        super();
+        setType("Medecin");
+        specialite = new SimpleStringProperty();
     }
 
     public String getSpecialite() {

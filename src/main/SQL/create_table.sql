@@ -60,7 +60,8 @@ CREATE TABLE Personnel (
                            Email        VARCHAR(255),
                            Telephone    VARCHAR(20),
                            Statut       VARCHAR(255),
-                           Specialite   VARCHAR(255),
+                           Specialite   VARCHAR(255),  -- Used for specialization
+                           Type         VARCHAR(255),  -- New column to identify personnel type
                            PRIMARY KEY (ID_Personnel)
 );
 

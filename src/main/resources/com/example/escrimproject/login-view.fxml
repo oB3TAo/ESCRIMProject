@@ -11,14 +11,15 @@
 
 <?import javafx.scene.control.PasswordField?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0"
-            prefWidth="688.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+            prefWidth="688.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.escrimproject.LoginController">
     <children>
         <TextField fx:id="usernameField" layoutX="57.0" layoutY="147.0" promptText="Username"/>
-        <PasswordField fx:id="passwordField" layoutX="57.0" layoutY="222.0" promptText="Password" />
+        <PasswordField fx:id="passwordField" layoutX="57.0" layoutY="222.0" promptText="Password"/>
         <Label layoutX="66.0" layoutY="116.0" prefHeight="26.0" prefWidth="132.0" text="Nom d'utilisateur"/>
         <Label layoutX="66.0" layoutY="195.0" prefHeight="26.0" prefWidth="132.0" text="Mot de passe"/>
         <Button fx:id="boutonConnexion" layoutX="95.0" layoutY="278.0" mnemonicParsing="false"
-                style="-fx-background-color: D9D9D9;" text="Connexion"/>
+                onAction="#handleLoginButtonClick" style="-fx-background-color: D9D9D9;" text="Connexion"/>
         <AnchorPane layoutX="344.0" prefHeight="470.0" prefWidth="346.0" style="-fx-background-color: FF5733;">
             <children>
                 <Button layoutX="277.0" layoutY="14.0" mnemonicParsing="false" style="-fx-background-color: D9D9D9;"
