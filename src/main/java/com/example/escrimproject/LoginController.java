@@ -1,21 +1,18 @@
 package com.example.escrimproject;
 
+import com.example.escrimproject.architecture.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class LoginController {
 
@@ -30,7 +27,7 @@ public class LoginController {
     @FXML
     private void initialize() {
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/escrim", "root", "GtAlMsS=32=460M");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/escrim", "root", "MySQL_B3TA90");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -51,7 +48,7 @@ public class LoginController {
                 throw new RuntimeException(e);
             }
             Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setScene(new Scene(root, 1000, 1000));
+            stage.setScene(new Scene(root, 688 , 470));
         } else {
             // Display an error message
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -62,13 +59,13 @@ public class LoginController {
     }
 
     private boolean isValidUser(String username, String password) throws SQLException {
-        String query = "SELECT * FROM users WHERE username = ?";
+        String query = "SELECT * FROM User WHERE Username = ?";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setString(1, username);
         ResultSet resultSet = statement.executeQuery();
 
         if (resultSet.next()) {
-            String storedPassword = resultSet.getString("password");
+            String storedPassword = resultSet.getString("Password");
             return storedPassword.equals(password);
         } else {
             return false;
