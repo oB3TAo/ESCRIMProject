@@ -8,7 +8,7 @@ import javafx.scene.control.TabPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class MainTabController implements Initializable {
+public class AdminController implements Initializable {
 
     @FXML
     private TabPane tabPane;

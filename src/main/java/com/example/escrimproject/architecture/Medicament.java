@@ -12,5 +12,8 @@ public class Medicament extends Produit {
     public void setDateDePeremption(Date dateDePeremption) {
         this.dateDePeremption = dateDePeremption;
     }
+    public Date dateDePeremptionProperty() {
+        return dateDePeremption;
+    }
 }
 
