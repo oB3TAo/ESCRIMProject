@@ -40,15 +40,23 @@ public class LoginController {
 
         // Check if the username and password are valid
         if (isValidUser(username, password)) {
-            // Load the main view
-            Parent root = null;
-            try {
-                root = FXMLLoader.load(getClass().getResource("main_tab.fxml"));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            // Get the role of the user
+            String role = getUserRole(username);
+
+            // Load the appropriate tab based on the user's role
+            if ("Medecin".equals(role)) {
+                loadMedecinTab();
+            } else if ("Logisticien".equals(role)) {
+                loadLogisticienTab();
+            } else if ("Admin".equals(role)) {
+                loadAdminTab();
+            } else {
+                // Display an error message if the role is not recognized
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Invalid Role");
+                alert.setContentText("Your role is not recognized.");
+                alert.showAndWait();
             }
-            Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setScene(new Scene(root, 688 , 470));
         } else {
             // Display an error message
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -57,6 +65,62 @@ public class LoginController {
             alert.showAndWait();
         }
     }
+
+    private String getUserRole(String username) throws SQLException {
+        String query = "SELECT Role FROM User WHERE Username = ?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setString(1, username);
+        ResultSet resultSet = statement.executeQuery();
+
+        if (resultSet.next()) {
+            return resultSet.getString("Role");
+        } else {
+            return null; // User not found
+        }
+    }
+
+    private void loadMedecinTab() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("medecin_tab.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) usernameField.getScene().getWindow();
+            stage.setScene(new Scene(root, 688, 470));
+            // Pass any necessary data to the controller of the medecin tab if needed
+            // MedecinTabController controller = loader.getController();
+            // controller.initData(...);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadLogisticienTab() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("logisticien_tab.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) usernameField.getScene().getWindow();
+            stage.setScene(new Scene(root, 688, 470));
+            // Pass any necessary data to the controller of the logisticien tab if needed
+            // LogisticienTabController controller = loader.getController();
+            // controller.initData(...);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadAdminTab() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("admin_tab.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) usernameField.getScene().getWindow();
+            stage.setScene(new Scene(root, 688, 470));
+            // Pass any necessary data to the controller of the admin tab if needed
+            // AdminController controller = loader.getController();
+            // controller.initData(...);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private boolean isValidUser(String username, String password) throws SQLException {
         String query = "SELECT * FROM User WHERE Username = ?";

@@ -71,6 +71,7 @@ CREATE TABLE Produit (
                          Poids            FLOAT,
                          Quantite         INT(11),
                          DateDePeremption DATE,
+                         Type_Prod        VARCHAR(255),  -- New column to identify personnel type
                          ID_Produit       INT(11) NOT NULL AUTO_INCREMENT,
                          ID_Commande      INT(11) NOT NULL,
                          ID_Stock         INT(11) NOT NULL,
