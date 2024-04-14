@@ -8,19 +8,6 @@
             prefWidth="1034.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.escrimproject.AdminController">
     <children>
-        <TabPane layoutX="7.0" layoutY="9.0" prefHeight="676.0" prefWidth="1016.0">
-            <tabs>
-                <Tab text="Personnel">
-                    <content>
-                        <fx:include fx:id="personnelTabContent" source="personnel-view.fxml"/>
-                    </content>
-                </Tab>
-                <Tab text="Produit">
-                    <content>
-                        <fx:include fx:id="produitTabContent" source="tab/produit_tab.fxml"/>
-                    </content>
-                </Tab>
-            </tabs>
-        </TabPane>
+        <fx:include fx:id="personnelTabContent" source="personnel-view.fxml"/>
     </children>
 </AnchorPane>

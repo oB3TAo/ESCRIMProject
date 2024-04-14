@@ -1,8 +1,6 @@
 package com.example.escrimproject.architecture;
 
-import javafx.beans.property.FloatProperty;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -10,14 +8,14 @@ import javafx.beans.property.StringProperty;
 public abstract class Produit {
     private final IntegerProperty id;
     private final StringProperty nom;
-    private final FloatProperty poids;
-    private final FloatProperty quantite;
+    private final StringProperty poids;
+    private final StringProperty quantite;
 
     public Produit() {
         this.id = new SimpleIntegerProperty();
         this.nom = new SimpleStringProperty();
-        this.poids = new SimpleFloatProperty();
-        this.quantite = new SimpleFloatProperty();
+        this.poids = new SimpleStringProperty();
+        this.quantite = new SimpleStringProperty();
     }
 
     public IntegerProperty idProperty() {
@@ -44,27 +42,27 @@ public abstract class Produit {
         this.nom.set(nom);
     }
 
-    public FloatProperty poidsProperty() {
+    public StringProperty poidsProperty() {
         return poids;
     }
 
-    public float getPoids() {
+    public String getPoids() {
         return poids.get();
     }
 
     public void setPoids(float poids) {
-        this.poids.set(poids);
+        this.poids.set(String.valueOf(poids));
     }
 
-    public FloatProperty quantiteProperty() {
+    public StringProperty quantiteProperty() {
         return quantite;
     }
 
-    public float getQuantite() {
+    public String getQuantite() {
         return quantite.get();
     }
 
     public void setQuantite(float quantite) {
-        this.quantite.set(quantite);
+        this.quantite.set(String.valueOf(quantite));
     }
 }
