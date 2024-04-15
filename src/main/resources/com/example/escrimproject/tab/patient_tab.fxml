@@ -1,26 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escrimproject.PatientController">
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escrimproject.PatientController" prefHeight="600.0" prefWidth="900.0">
     <children>
-        <TableView fx:id="table" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="900.0">
-            <columns>
-                <TableColumn fx:id="IDColmn" text="ID" prefWidth="50.0"/>
-                <TableColumn fx:id="NomColmn" text="Nom" prefWidth="100.0"/>
-                <TableColumn fx:id="DateNaissanceColmn" text="Date de Naissance" prefWidth="100.0"/>
-                <TableColumn fx:id="SexeColmn" text="Sexe" prefWidth="50.0"/>
-                <TableColumn fx:id="SSNColmn" text="Numéro de Sécurité Sociale" prefWidth="150.0"/>
-                <TableColumn fx:id="AdresseColmn" text="Adresse" prefWidth="150.0"/>
-                <TableColumn fx:id="TelephoneColmn" text="Téléphone" prefWidth="100.0"/>
-                <TableColumn fx:id="EmailColmn" text="Email" prefWidth="150.0"/>
-                <TableColumn fx:id="TraitementColmn" text="Traitement en Cours" prefWidth="150.0"/>
-                <TableColumn fx:id="DiagnosticColmn" text="Diagnostic" prefWidth="150.0"/>
-                <TableColumn fx:id="StatutColmn" text="Statut" prefWidth="100.0"/>
-            </columns>
-        </TableView>
-        <ComboBox fx:id="cmbSexe" layoutX="920.0" layoutY="14.0" prefWidth="150.0"/>
-        <ComboBox fx:id="cmbStatut" layoutX="920.0" layoutY="44.0" prefWidth="150.0"/>
-        <Button fx:id="btnAdd" layoutX="920.0" layoutY="74.0" text="Add" onAction="#handleAddButtonClick"/>
+        <Label layoutX="20.0" layoutY="10.0" text="Patient Management" style="-fx-font-size: 24px;">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <Pane layoutX="20.0" layoutY="50.0" prefHeight="200.0" prefWidth="860.0" style="-fx-background-color: lightgrey;">
+            <children>
+                <TableView fx:id="table" layoutX="14.0" layoutY="14.0" prefHeight="172.0" prefWidth="832.0">
+                    <columns>
+                        <TableColumn fx:id="IDColmn" text="ID" prefWidth="75.0"/>
+                        <TableColumn fx:id="NomColmn" text="Nom" prefWidth="100.0"/>
+                        <TableColumn fx:id="DateNaissanceColmn" text="Date de Naissance" prefWidth="125.0"/>
+                        <TableColumn fx:id="SexeColmn" text="Sexe" prefWidth="75.0"/>
+                        <TableColumn fx:id="SSNColmn" text="Numéro de Sécurité Sociale" prefWidth="150.0"/>
+                        <TableColumn fx:id="AdresseColmn" text="Adresse" prefWidth="125.0"/>
+                        <TableColumn fx:id="TelephoneColmn" text="Téléphone" prefWidth="100.0"/>
+                        <TableColumn fx:id="EmailColmn" text="Email" prefWidth="150.0"/>
+                        <TableColumn fx:id="TraitementColmn" text="Traitement en Cours" prefWidth="150.0"/>
+                        <TableColumn fx:id="DiagnosticColmn" text="Diagnostic" prefWidth="150.0"/>
+                        <TableColumn fx:id="StatutColmn" text="Statut" prefWidth="100.0"/>
+                    </columns>
+                </TableView>
+            </children>
+        </Pane>
+        <Pane layoutX="20.0" layoutY="260.0" prefHeight="330.0" prefWidth="860.0" style="-fx-background-color: lightgrey;">
+            <children>
+                <Label layoutX="14.0" layoutY="14.0" text="Nom:"/>
+                <TextField fx:id="txtNom" layoutX="120.0" layoutY="10.0" prefWidth="200.0"/>
+                <Label layoutX="350.0" layoutY="14.0" text="Date de Naissance:"/>
+                <DatePicker fx:id="txtDateNaissance" layoutX="480.0" layoutY="10.0" prefWidth="200.0"/>
+                <Label layoutX="14.0" layoutY="60.0" text="Sexe:"/>
+                <ComboBox fx:id="cmbSexe" layoutX="120.0" layoutY="56.0" prefWidth="200.0"/>
+                <Label layoutX="350.0" layoutY="60.0" text="Numéro SS:"/>
+                <TextField fx:id="txtSSN" layoutX="480.0" layoutY="56.0" prefWidth="200.0"/>
+                <Label layoutX="14.0" layoutY="106.0" text="Adresse:"/>
+                <TextField fx:id="txtAdresse" layoutX="120.0" layoutY="102.0" prefWidth="200.0"/>
+                <Label layoutX="350.0" layoutY="106.0" text="Téléphone:"/>
+                <TextField fx:id="txtTelephone" layoutX="480.0" layoutY="102.0" prefWidth="200.0"/>
+                <Label layoutX="14.0" layoutY="152.0" text="Email:"/>
+                <TextField fx:id="txtEmail" layoutX="120.0" layoutY="148.0" prefWidth="200.0"/>
+                <Label layoutX="350.0" layoutY="152.0" text="Traitement en Cours:"/>
+                <TextField fx:id="txtTraitement" layoutX="480.0" layoutY="148.0" prefWidth="200.0"/>
+                <Label layoutX="14.0" layoutY="198.0" text="Diagnostic:"/>
+                <TextField fx:id="txtDiagnostic" layoutX="120.0" layoutY="194.0" prefWidth="560.0"/>
+                <Label layoutX="14.0" layoutY="244.0" text="Statut:"/>
+                <ComboBox fx:id="cmbStatut" layoutX="120.0" layoutY="240.0" prefWidth="200.0"/>
+                <ButtonBar layoutX="14.0" layoutY="290.0" prefWidth="832.0">
+                    <buttons>
+                        <Button fx:id="btnAdd" text="Add" onAction="#handleAddButtonClick" prefWidth="100.0"/>
+                        <Button fx:id="btnUpdate" text="Update" onAction="#updatePatient" prefWidth="100.0"/>
+                        <Button fx:id="btnDelete" text="Delete" onAction="#deletePatient" prefWidth="100.0"/>
+                    </buttons>
+                </ButtonBar>
+            </children>
+        </Pane>
     </children>
 </AnchorPane>
