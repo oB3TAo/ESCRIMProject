@@ -3,16 +3,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escrimproject.PatientController" prefHeight="600.0" prefWidth="900.0">
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escrimproject.PatientController" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: linear-gradient(to bottom, #e0eafc, #cfdef3);">
     <children>
-        <Label layoutX="20.0" layoutY="10.0" text="Patient Management" style="-fx-font-size: 24px;">
-            <font>
-                <Font size="24.0" />
-            </font>
+        <Label layoutX="20.0" layoutY="10.0" text="Patient Management" style="-fx-font-size: 24px; -fx-text-fill: #2c3e50; -fx-font-family: 'Arial';">
         </Label>
-        <Pane layoutX="20.0" layoutY="50.0" prefHeight="200.0" prefWidth="860.0" style="-fx-background-color: lightgrey;">
+        <Pane layoutX="20.0" layoutY="50.0" prefHeight="200.0" prefWidth="860.0" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-color: #d6e6f2; -fx-border-width: 1; -fx-border-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.16), 10, 0, 0, 10);">
             <children>
-                <TableView fx:id="table" layoutX="14.0" layoutY="14.0" prefHeight="172.0" prefWidth="832.0">
+                <TableView fx:id="table" layoutX="14.0" layoutY="14.0" prefHeight="172.0" prefWidth="832.0" style="-fx-font-family: 'Arial';">
                     <columns>
                         <TableColumn fx:id="IDColmn" text="ID" prefWidth="75.0"/>
                         <TableColumn fx:id="NomColmn" text="Nom" prefWidth="100.0"/>
@@ -30,36 +27,34 @@
                 </TableView>
             </children>
         </Pane>
-        <Pane layoutX="20.0" layoutY="260.0" prefHeight="330.0" prefWidth="860.0" style="-fx-background-color: lightgrey;">
+        <Pane layoutX="20.0" layoutY="260.0" prefHeight="330.0" prefWidth="860.0" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-color: #d6e6f2; -fx-border-width: 1; -fx-border-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.16), 10, 0, 0, 10);">
             <children>
-                <Label layoutX="14.0" layoutY="14.0" text="Nom:"/>
-                <TextField fx:id="txtNom" layoutX="120.0" layoutY="10.0" prefWidth="200.0"/>
-                <Label layoutX="350.0" layoutY="14.0" text="Date de Naissance:"/>
-                <DatePicker fx:id="txtDateNaissance" layoutX="480.0" layoutY="10.0" prefWidth="200.0"/>
-                <Label layoutX="14.0" layoutY="60.0" text="Sexe:"/>
-                <ComboBox fx:id="cmbSexe" layoutX="120.0" layoutY="56.0" prefWidth="200.0"/>
-                <Label layoutX="350.0" layoutY="60.0" text="Numéro SS:"/>
-                <TextField fx:id="txtSSN" layoutX="480.0" layoutY="56.0" prefWidth="200.0"/>
-                <Label layoutX="14.0" layoutY="106.0" text="Adresse:"/>
-                <TextField fx:id="txtAdresse" layoutX="120.0" layoutY="102.0" prefWidth="200.0"/>
-                <Label layoutX="350.0" layoutY="106.0" text="Téléphone:"/>
-                <TextField fx:id="txtTelephone" layoutX="480.0" layoutY="102.0" prefWidth="200.0"/>
-                <Label layoutX="14.0" layoutY="152.0" text="Email:"/>
-                <TextField fx:id="txtEmail" layoutX="120.0" layoutY="148.0" prefWidth="200.0"/>
-                <Label layoutX="350.0" layoutY="152.0" text="Traitement en Cours:"/>
-                <TextField fx:id="txtTraitement" layoutX="480.0" layoutY="148.0" prefWidth="200.0"/>
-                <Label layoutX="14.0" layoutY="198.0" text="Diagnostic:"/>
-                <TextField fx:id="txtDiagnostic" layoutX="120.0" layoutY="194.0" prefWidth="560.0"/>
-                <Label layoutX="14.0" layoutY="244.0" text="Statut:"/>
-                <ComboBox fx:id="cmbStatut" layoutX="120.0" layoutY="240.0" prefWidth="200.0"/>
-                <Label layoutX="350.0" layoutY="244.0" text="ID Personnel:"/>
-                <TextField fx:id="txtIDPersonnel" layoutX="480.0" layoutY="240.0" prefWidth="200.0"/>
+                <Label layoutX="14.0" layoutY="14.0" text="Nom:" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';"/>
+                <TextField fx:id="txtNom" layoutX="120.0" layoutY="10.0" prefWidth="200.0" style="-fx-font-family: 'Arial';"/>
+                <Label layoutX="350.0" layoutY="14.0" text="Date de Naissance:" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';"/>
+                <DatePicker fx:id="txtDateNaissance" layoutX="510.0" layoutY="10.0" prefWidth="230.0" style="-fx-font-family: 'Arial';"/>
+                <Label layoutX="14.0" layoutY="60.0" text="Sexe:" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';"/>
+                <ComboBox fx:id="cmbSexe" layoutX="120.0" layoutY="56.0" prefWidth="200.0" style="-fx-font-family: 'Arial';"/>
+                <Label layoutX="350.0" layoutY="60.0" text="Numéro SS:" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';"/>
+                <TextField fx:id="txtSSN" layoutX="510.0" layoutY="56.0" prefWidth="230.0" style="-fx-font-family: 'Arial';"/>
+                <Label layoutX="14.0" layoutY="106.0" text="Adresse:" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';"/>
+                <TextField fx:id="txtAdresse" layoutX="120.0" layoutY="102.0" prefWidth="620.0" style="-fx-font-family: 'Arial';"/>
+                <Label layoutX="14.0" layoutY="152.0" text="Email:" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';"/>
+                <TextField fx:id="txtEmail" layoutX="120.0" layoutY="148.0" prefWidth="200.0" style="-fx-font-family: 'Arial';"/>
+                <Label layoutX="350.0" layoutY="152.0" text="Traitement en Cours:" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';"/>
+                <TextField fx:id="txtTraitement" layoutX="510.0" layoutY="148.0" prefWidth="230.0" style="-fx-font-family: 'Arial';"/>
+                <Label layoutX="14.0" layoutY="198.0" text="Diagnostic:" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';"/>
+                <TextField fx:id="txtDiagnostic" layoutX="120.0" layoutY="194.0" prefWidth="620.0" style="-fx-font-family: 'Arial';"/>
+                <Label layoutX="14.0" layoutY="244.0" text="Statut:" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';"/>
+                <ComboBox fx:id="cmbStatut" layoutX="120.0" layoutY="240.0" prefWidth="200.0" style="-fx-font-family: 'Arial';"/>
+                <Label layoutX="350.0" layoutY="244.0" text="ID Personnel:" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';"/>
+                <TextField fx:id="txtIDPersonnel" layoutX="510.0" layoutY="240.0" prefWidth="230.0" style="-fx-font-family: 'Arial';"/>
                 <!-- Existing buttons -->
                 <ButtonBar layoutX="14.0" layoutY="290.0" prefWidth="832.0">
                     <buttons>
-                        <Button fx:id="btnAdd" text="Add" onAction="#addPatient" prefWidth="100.0"/>
-                        <Button fx:id="btnUpdate" text="Update" onAction="#updatePatient" prefWidth="100.0"/>
-                        <Button fx:id="btnDelete" text="Delete" onAction="#deletePatient" prefWidth="100.0"/>
+                        <Button fx:id="btnAdd" text="Add" onAction="#addPatient" prefWidth="100.0" style="-fx-background-color: linear-gradient(to bottom, #2ecc71, #27ae60); -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5; -fx-font-family: 'Arial';"/>
+                        <Button fx:id="btnUpdate" text="Update" onAction="#updatePatient" prefWidth="100.0" style="-fx-background-color: linear-gradient(to bottom, #f39c12, #d35400); -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5; -fx-font-family: 'Arial';"/>
+                        <Button fx:id="btnDelete" text="Delete" onAction="#deletePatient" prefWidth="100.0" style="-fx-background-color: linear-gradient(to bottom, #e74c3c, #c0392b); -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5; -fx-font-family: 'Arial';"/>
                     </buttons>
                 </ButtonBar>
             </children>
