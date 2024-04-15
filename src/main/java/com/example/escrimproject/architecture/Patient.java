@@ -1,73 +1,179 @@
 package com.example.escrimproject.architecture;
 
+import javafx.beans.property.*;
+
+import java.time.LocalDate;
+
 public class Patient {
-    private int identifiant;
-    private String nom;
-    private String diagnostic;
-    private String traitementEnCours;
-    private boolean isAlive;
-    private boolean isTakenInCharge;
+    private final IntegerProperty id;
+    private final StringProperty nom;
+    private final ObjectProperty<LocalDate> dateDeNaissance;
+    private final StringProperty sexe;
+    private final StringProperty numeroSecuriteSocial;
+    private final StringProperty adresse;
+    private final StringProperty numeroTelephone;
+    private final StringProperty email;
+    private final StringProperty traitementEnCours;
+    private final StringProperty diagnostic;
+    private final StringProperty statut;
+    private final IntegerProperty idPersonnel;
 
-    // Default constructor
     public Patient() {
+        id = new SimpleIntegerProperty();
+        nom = new SimpleStringProperty();
+        dateDeNaissance = new SimpleObjectProperty<>();
+        sexe = new SimpleStringProperty();
+        numeroSecuriteSocial = new SimpleStringProperty();
+        adresse = new SimpleStringProperty();
+        numeroTelephone = new SimpleStringProperty();
+        email = new SimpleStringProperty();
+        traitementEnCours = new SimpleStringProperty();
+        diagnostic = new SimpleStringProperty();
+        statut = new SimpleStringProperty();
+        idPersonnel = new SimpleIntegerProperty();
     }
 
-    // Parameterized constructor
-    public Patient(int identifiant, String nom, String diagnostic, String traitementEnCours, boolean isAlive, boolean isTakenInCharge) {
-        this.identifiant = identifiant;
-        this.nom = nom;
-        this.diagnostic = diagnostic;
-        this.traitementEnCours = traitementEnCours;
-        this.isAlive = isAlive;
-        this.isTakenInCharge = isTakenInCharge;
+    public IntegerProperty idProperty() {
+        return id;
     }
 
-    // Getters and setters
-    public int getIdentifiant() {
-        return identifiant;
+    public int getId() {
+        return id.get();
     }
 
-    public void setIdentifiant(int identifiant) {
-        this.identifiant = identifiant;
+    public void setId(int newId) {
+        id.set(newId);
     }
 
-    public String getNom() {
+    public StringProperty nomProperty() {
         return nom;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public String getNom() {
+        return nom.get();
     }
 
-    public String getDiagnostic() {
-        return diagnostic;
+    public void setNom(String newNom) {
+        nom.set(newNom);
     }
 
-    public void setDiagnostic(String diagnostic) {
-        this.diagnostic = diagnostic;
+    public ObjectProperty<LocalDate> dateDeNaissanceProperty() {
+        return dateDeNaissance;
     }
 
-    public String getTraitementEnCours() {
+    public LocalDate getDateDeNaissance() {
+        return dateDeNaissance.get();
+    }
+
+    public void setDateDeNaissance(LocalDate newDateDeNaissance) {
+        dateDeNaissance.set(newDateDeNaissance);
+    }
+
+    public StringProperty sexeProperty() {
+        return sexe;
+    }
+
+    public String getSexe() {
+        return sexe.get();
+    }
+
+    public void setSexe(String newSexe) {
+        sexe.set(newSexe);
+    }
+
+    public StringProperty numeroSecuriteSocialProperty() {
+        return numeroSecuriteSocial;
+    }
+
+    public String getNumeroSecuriteSocial() {
+        return numeroSecuriteSocial.get();
+    }
+
+    public void setNumeroSecuriteSocial(String newNumeroSecuriteSocial) {
+        numeroSecuriteSocial.set(newNumeroSecuriteSocial);
+    }
+
+    public StringProperty adresseProperty() {
+        return adresse;
+    }
+
+    public String getAdresse() {
+        return adresse.get();
+    }
+
+    public void setAdresse(String newAdresse) {
+        adresse.set(newAdresse);
+    }
+
+    public StringProperty numeroTelephoneProperty() {
+        return numeroTelephone;
+    }
+
+    public String getNumeroTelephone() {
+        return numeroTelephone.get();
+    }
+
+    public void setNumeroTelephone(String newNumeroTelephone) {
+        numeroTelephone.set(newNumeroTelephone);
+    }
+
+    public StringProperty emailProperty() {
+        return email;
+    }
+
+    public String getEmail() {
+        return email.get();
+    }
+
+    public void setEmail(String newEmail) {
+        email.set(newEmail);
+    }
+
+    public StringProperty traitementEnCoursProperty() {
         return traitementEnCours;
     }
 
-    public void setTraitementEnCours(String traitementEnCours) {
-        this.traitementEnCours = traitementEnCours;
+    public String getTraitementEnCours() {
+        return traitementEnCours.get();
     }
 
-    public boolean isAlive() {
-        return isAlive;
+    public void setTraitementEnCours(String newTraitementEnCours) {
+        traitementEnCours.set(newTraitementEnCours);
     }
 
-    public void setAlive(boolean isAlive) {
-        this.isAlive = isAlive;
+    public StringProperty diagnosticProperty() {
+        return diagnostic;
     }
 
-    public boolean isTakenInCharge() {
-        return isTakenInCharge;
+    public String getDiagnostic() {
+        return diagnostic.get();
     }
 
-    public void setTakenInCharge(boolean isTakenInCharge) {
-        this.isTakenInCharge = isTakenInCharge;
+    public void setDiagnostic(String newDiagnostic) {
+        diagnostic.set(newDiagnostic);
+    }
+
+    public StringProperty statutProperty() {
+        return statut;
+    }
+
+    public String getStatut() {
+        return statut.get();
+    }
+
+    public void setStatut(String newStatut) {
+        statut.set(newStatut);
+    }
+
+    public IntegerProperty idPersonnelProperty() {
+        return idPersonnel;
+    }
+
+    public int getIdPersonnel() {
+        return idPersonnel.get();
+    }
+
+    public void setIdPersonnel(int newIdPersonnel) {
+        idPersonnel.set(newIdPersonnel);
     }
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escrimproject.PatientController">
+    <children>
+        <TableView fx:id="table" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="900.0">
+            <columns>
+                <TableColumn fx:id="IDColmn" text="ID" prefWidth="50.0"/>
+                <TableColumn fx:id="NomColmn" text="Nom" prefWidth="100.0"/>
+                <TableColumn fx:id="DateNaissanceColmn" text="Date de Naissance" prefWidth="100.0"/>
+                <TableColumn fx:id="SexeColmn" text="Sexe" prefWidth="50.0"/>
+                <TableColumn fx:id="SSNColmn" text="Numéro de Sécurité Sociale" prefWidth="150.0"/>
+                <TableColumn fx:id="AdresseColmn" text="Adresse" prefWidth="150.0"/>
+                <TableColumn fx:id="TelephoneColmn" text="Téléphone" prefWidth="100.0"/>
+                <TableColumn fx:id="EmailColmn" text="Email" prefWidth="150.0"/>
+                <TableColumn fx:id="TraitementColmn" text="Traitement en Cours" prefWidth="150.0"/>
+                <TableColumn fx:id="DiagnosticColmn" text="Diagnostic" prefWidth="150.0"/>
+                <TableColumn fx:id="StatutColmn" text="Statut" prefWidth="100.0"/>
+            </columns>
+        </TableView>
+        <ComboBox fx:id="cmbSexe" layoutX="920.0" layoutY="14.0" prefWidth="150.0"/>
+        <ComboBox fx:id="cmbStatut" layoutX="920.0" layoutY="44.0" prefWidth="150.0"/>
+        <Button fx:id="btnAdd" layoutX="920.0" layoutY="74.0" text="Add" onAction="#handleAddButtonClick"/>
+    </children>
+</AnchorPane>
