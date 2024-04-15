@@ -145,6 +145,22 @@ public class PatientController implements Initializable {
 
     @FXML
     void deletePatient(ActionEvent event) {
-        // Implementation for deleting a patient
+        // Similar to addPatient but with SQL DELETE statement
+        if (table.getSelectionModel().getSelectedItem() != null) {
+            Patient selectedPatient = table.getSelectionModel().getSelectedItem();
+            String sql = "DELETE FROM Patient WHERE ID_Patient=?";
+            try {
+                PreparedStatement pst = con.prepareStatement(sql);
+                pst.setInt(1, selectedPatient.getId());
+
+                pst.executeUpdate();
+                loadTableData();  // Refresh table data
+            } catch (SQLException ex) {
+                Logger.getLogger(PatientController.class.getName()).log(Level.SEVERE, null, ex);
+                showAlert("Failed to delete patient: " + ex.getMessage());
+            }
+        } else {
+            showAlert("No patient selected for deletion.");
+        }
     }
 }
