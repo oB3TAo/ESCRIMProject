@@ -25,6 +25,7 @@
                         <TableColumn fx:id="TraitementColmn" text="Traitement en Cours" prefWidth="150.0"/>
                         <TableColumn fx:id="DiagnosticColmn" text="Diagnostic" prefWidth="150.0"/>
                         <TableColumn fx:id="StatutColmn" text="Statut" prefWidth="100.0"/>
+                        <TableColumn fx:id="IDPersonnelColmn" text="ID Personnel" prefWidth="100.0"/>
                     </columns>
                 </TableView>
             </children>
@@ -51,9 +52,12 @@
                 <TextField fx:id="txtDiagnostic" layoutX="120.0" layoutY="194.0" prefWidth="560.0"/>
                 <Label layoutX="14.0" layoutY="244.0" text="Statut:"/>
                 <ComboBox fx:id="cmbStatut" layoutX="120.0" layoutY="240.0" prefWidth="200.0"/>
+                <Label layoutX="350.0" layoutY="244.0" text="ID Personnel:"/>
+                <TextField fx:id="txtIDPersonnel" layoutX="480.0" layoutY="240.0" prefWidth="200.0"/>
+                <!-- Existing buttons -->
                 <ButtonBar layoutX="14.0" layoutY="290.0" prefWidth="832.0">
                     <buttons>
-                        <Button fx:id="btnAdd" text="Add" onAction="#handleAddButtonClick" prefWidth="100.0"/>
+                        <Button fx:id="btnAdd" text="Add" onAction="#addPatient" prefWidth="100.0"/>
                         <Button fx:id="btnUpdate" text="Update" onAction="#updatePatient" prefWidth="100.0"/>
                         <Button fx:id="btnDelete" text="Delete" onAction="#deletePatient" prefWidth="100.0"/>
                     </buttons>

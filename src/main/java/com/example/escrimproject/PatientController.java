@@ -28,6 +28,8 @@ public class PatientController implements Initializable {
     @FXML private TableColumn<Patient, String> TraitementColmn;
     @FXML private TableColumn<Patient, String> DiagnosticColmn;
     @FXML private TableColumn<Patient, String> StatutColmn;
+    @FXML private TableColumn<Patient, Integer> IDPersonnelColmn;
+
 
     @FXML private TextField txtNom;
     @FXML private DatePicker txtDateNaissance;
@@ -39,6 +41,7 @@ public class PatientController implements Initializable {
     @FXML private TextField txtTraitement;
     @FXML private TextField txtDiagnostic;
     @FXML private ComboBox<String> cmbStatut;
+    @FXML private TextField txtIDPersonnel;
 
     @FXML private Button btnAdd;
     @FXML private Button btnUpdate;
@@ -85,6 +88,7 @@ public class PatientController implements Initializable {
         txtTraitement.setText(patient.getTraitementEnCours());
         txtDiagnostic.setText(patient.getDiagnostic());
         cmbStatut.setValue(patient.getStatut());
+        txtIDPersonnel.setText(Integer.toString(patient.getIdPersonnel()));
     }
 
     private void connectDatabase() {
@@ -98,21 +102,18 @@ public class PatientController implements Initializable {
     }
 
     private void setupCellValueFactories() {
-        if (table != null) {
-            IDColmn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
-            NomColmn.setCellValueFactory(cellData -> cellData.getValue().nomProperty());
-            DateNaissanceColmn.setCellValueFactory(cellData -> cellData.getValue().dateDeNaissanceProperty());
-            SexeColmn.setCellValueFactory(cellData -> cellData.getValue().sexeProperty());
-            SSNColmn.setCellValueFactory(cellData -> cellData.getValue().numeroSecuriteSocialProperty());
-            AdresseColmn.setCellValueFactory(cellData -> cellData.getValue().adresseProperty());
-            TelephoneColmn.setCellValueFactory(cellData -> cellData.getValue().numeroTelephoneProperty());
-            EmailColmn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
-            TraitementColmn.setCellValueFactory(cellData -> cellData.getValue().traitementEnCoursProperty());
-            DiagnosticColmn.setCellValueFactory(cellData -> cellData.getValue().diagnosticProperty());
-            StatutColmn.setCellValueFactory(cellData -> cellData.getValue().statutProperty());
-        } else {
-            Logger.getLogger(PatientController.class.getName()).log(Level.SEVERE, "Table is not initialized");
-        }
+        IDColmn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
+        NomColmn.setCellValueFactory(cellData -> cellData.getValue().nomProperty());
+        DateNaissanceColmn.setCellValueFactory(cellData -> cellData.getValue().dateDeNaissanceProperty());
+        SexeColmn.setCellValueFactory(cellData -> cellData.getValue().sexeProperty());
+        SSNColmn.setCellValueFactory(cellData -> cellData.getValue().numeroSecuriteSocialProperty());
+        AdresseColmn.setCellValueFactory(cellData -> cellData.getValue().adresseProperty());
+        TelephoneColmn.setCellValueFactory(cellData -> cellData.getValue().numeroTelephoneProperty());
+        EmailColmn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
+        TraitementColmn.setCellValueFactory(cellData -> cellData.getValue().traitementEnCoursProperty());
+        DiagnosticColmn.setCellValueFactory(cellData -> cellData.getValue().diagnosticProperty());
+        StatutColmn.setCellValueFactory(cellData -> cellData.getValue().statutProperty());
+        IDPersonnelColmn.setCellValueFactory(cellData -> cellData.getValue().idPersonnelProperty().asObject());
     }
 
     private void loadTableData() {
@@ -133,6 +134,7 @@ public class PatientController implements Initializable {
                 newPatient.setDiagnostic(rs.getString("Diagnostic"));
                 newPatient.setTraitementEnCours(rs.getString("Traitement_en_Cours"));
                 newPatient.setStatut(rs.getString("Statut"));
+                newPatient.setIdPersonnel(rs.getInt("ID_Personnel"));
                 patients.add(newPatient);
             }
             table.setItems(patients);
@@ -151,21 +153,42 @@ public class PatientController implements Initializable {
     }
 
     @FXML
-    private void handleAddButtonClick(ActionEvent event) {
-        // Implementation for adding a patient
-    }
+    private void addPatient(ActionEvent event) {
+        String sql = "INSERT INTO Patient (Nom, Date_de_Naissance, Sexe, Numero_Securite_Social, Adresse, Numero_Telephone, Email, Traitement_en_Cours, Diagnostic, Statut, ID_Personnel) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try {
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, txtNom.getText());
+            pst.setDate(2, txtDateNaissance.getValue() != null ? Date.valueOf(txtDateNaissance.getValue()) : null);
+            pst.setString(3, cmbSexe.getValue());
+            pst.setString(4, txtSSN.getText());
+            pst.setString(5, txtAdresse.getText());
+            pst.setString(6, txtTelephone.getText());
+            pst.setString(7, txtEmail.getText());
+            pst.setString(8, txtTraitement.getText());
+            pst.setString(9, txtDiagnostic.getText());
+            pst.setString(10, cmbStatut.getValue());
+            pst.setInt(11, Integer.parseInt(txtIDPersonnel.getText()));
 
-    @FXML
-    void addPatient(ActionEvent event) {
-        // Implementation for adding a patient
+            int affectedRows = pst.executeUpdate();
+            if (affectedRows > 0) {
+                showAlert("Patient added successfully.");
+                loadTableData();  // Refresh table data
+            } else {
+                showAlert("No patient was added.");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientController.class.getName()).log(Level.SEVERE, null, ex);
+            showAlert("Failed to add patient: " + ex.getMessage());
+        } catch (NumberFormatException ex) {
+            showAlert("ID Personnel must be an integer.");
+        }
     }
 
     @FXML
     void updatePatient(ActionEvent event) {
-        // Similar to addPatient but with SQL UPDATE statement
         if (table.getSelectionModel().getSelectedItem() != null) {
             Patient selectedPatient = table.getSelectionModel().getSelectedItem();
-            String sql = "UPDATE Patient SET Nom=?, Date_de_Naissance=?, Sexe=?, Numero_Securite_Social=?, Adresse=?, Numero_Telephone=?, Email=?, Traitement_en_Cours=?, Diagnostic=?, Statut=? WHERE ID_Patient=?";
+            String sql = "UPDATE Patient SET Nom=?, Date_de_Naissance=?, Sexe=?, Numero_Securite_Social=?, Adresse=?, Numero_Telephone=?, Email=?, Traitement_en_Cours=?, Diagnostic=?, Statut=?, ID_Personnel=? WHERE ID_Patient=?";
             try {
                 PreparedStatement pst = con.prepareStatement(sql);
                 pst.setString(1, txtNom.getText());
@@ -178,13 +201,21 @@ public class PatientController implements Initializable {
                 pst.setString(8, txtTraitement.getText());
                 pst.setString(9, txtDiagnostic.getText());
                 pst.setString(10, cmbStatut.getValue());
-                pst.setInt(11, selectedPatient.getId());
+                pst.setInt(11, Integer.parseInt(txtIDPersonnel.getText()));
+                pst.setInt(12, selectedPatient.getId());
 
-                pst.executeUpdate();
-                loadTableData();  // Refresh table data
+                int affectedRows = pst.executeUpdate();
+                if (affectedRows > 0) {
+                    showAlert("Patient updated successfully.");
+                    loadTableData();  // Refresh table data
+                } else {
+                    showAlert("No patient was updated.");
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(PatientController.class.getName()).log(Level.SEVERE, null, ex);
                 showAlert("Failed to update patient: " + ex.getMessage());
+            } catch (NumberFormatException ex) {
+                showAlert("ID Personnel must be an integer.");
             }
         } else {
             showAlert("No patient selected for update.");
@@ -193,7 +224,6 @@ public class PatientController implements Initializable {
 
     @FXML
     void deletePatient(ActionEvent event) {
-        // Similar to addPatient but with SQL DELETE statement
         if (table.getSelectionModel().getSelectedItem() != null) {
             Patient selectedPatient = table.getSelectionModel().getSelectedItem();
             String sql = "DELETE FROM Patient WHERE ID_Patient=?";
@@ -201,8 +231,13 @@ public class PatientController implements Initializable {
                 PreparedStatement pst = con.prepareStatement(sql);
                 pst.setInt(1, selectedPatient.getId());
 
-                pst.executeUpdate();
-                loadTableData();  // Refresh table data
+                int affectedRows = pst.executeUpdate();
+                if (affectedRows > 0) {
+                    showAlert("Patient deleted successfully.");
+                    loadTableData();  // Refresh table data
+                } else {
+                    showAlert("No patient was deleted.");
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(PatientController.class.getName()).log(Level.SEVERE, null, ex);
                 showAlert("Failed to delete patient: " + ex.getMessage());
