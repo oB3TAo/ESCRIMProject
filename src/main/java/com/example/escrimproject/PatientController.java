@@ -55,6 +55,7 @@ public class PatientController implements Initializable {
             setupCellValueFactories();
             loadTableData();
             initializeComboBoxes();
+            setupRowSelectListener();
         } else {
             Logger.getLogger(PatientController.class.getName()).log(Level.SEVERE, "TableView is not initialized");
         }
@@ -63,6 +64,27 @@ public class PatientController implements Initializable {
     private void initializeComboBoxes() {
         cmbSexe.setItems(FXCollections.observableArrayList("M", "F"));
         cmbStatut.setItems(FXCollections.observableArrayList("Active", "Inactive"));
+    }
+
+    private void setupRowSelectListener() {
+        table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                fillFormFields(newSelection);
+            }
+        });
+    }
+
+    private void fillFormFields(Patient patient) {
+        txtNom.setText(patient.getNom());
+        txtDateNaissance.setValue(patient.getDateDeNaissance());
+        cmbSexe.setValue(patient.getSexe());
+        txtSSN.setText(patient.getNumeroSecuriteSocial());
+        txtAdresse.setText(patient.getAdresse());
+        txtTelephone.setText(patient.getNumeroTelephone());
+        txtEmail.setText(patient.getEmail());
+        txtTraitement.setText(patient.getTraitementEnCours());
+        txtDiagnostic.setText(patient.getDiagnostic());
+        cmbStatut.setValue(patient.getStatut());
     }
 
     private void connectDatabase() {
