@@ -140,7 +140,33 @@ public class PatientController implements Initializable {
 
     @FXML
     void updatePatient(ActionEvent event) {
-        // Implementation for updating a patient
+        // Similar to addPatient but with SQL UPDATE statement
+        if (table.getSelectionModel().getSelectedItem() != null) {
+            Patient selectedPatient = table.getSelectionModel().getSelectedItem();
+            String sql = "UPDATE Patient SET Nom=?, Date_de_Naissance=?, Sexe=?, Numero_Securite_Social=?, Adresse=?, Numero_Telephone=?, Email=?, Traitement_en_Cours=?, Diagnostic=?, Statut=? WHERE ID_Patient=?";
+            try {
+                PreparedStatement pst = con.prepareStatement(sql);
+                pst.setString(1, txtNom.getText());
+                pst.setDate(2, Date.valueOf(txtDateNaissance.getValue()));
+                pst.setString(3, cmbSexe.getValue());
+                pst.setString(4, txtSSN.getText());
+                pst.setString(5, txtAdresse.getText());
+                pst.setString(6, txtTelephone.getText());
+                pst.setString(7, txtEmail.getText());
+                pst.setString(8, txtTraitement.getText());
+                pst.setString(9, txtDiagnostic.getText());
+                pst.setString(10, cmbStatut.getValue());
+                pst.setInt(11, selectedPatient.getId());
+
+                pst.executeUpdate();
+                loadTableData();  // Refresh table data
+            } catch (SQLException ex) {
+                Logger.getLogger(PatientController.class.getName()).log(Level.SEVERE, null, ex);
+                showAlert("Failed to update patient: " + ex.getMessage());
+            }
+        } else {
+            showAlert("No patient selected for update.");
+        }
     }
 
     @FXML
