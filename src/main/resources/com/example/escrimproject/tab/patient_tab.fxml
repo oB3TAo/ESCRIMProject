@@ -38,7 +38,9 @@
                 <Label layoutX="350.0" layoutY="60.0" text="Numéro SS:" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';"/>
                 <TextField fx:id="txtSSN" layoutX="510.0" layoutY="56.0" prefWidth="230.0" style="-fx-font-family: 'Arial';"/>
                 <Label layoutX="14.0" layoutY="106.0" text="Adresse:" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';"/>
-                <TextField fx:id="txtAdresse" layoutX="120.0" layoutY="102.0" prefWidth="620.0" style="-fx-font-family: 'Arial';"/>
+                <TextField fx:id="txtAdresse" layoutX="120.0" layoutY="102.0" prefWidth="210.0" style="-fx-font-family: 'Arial';"/>
+                <Label layoutX="350.0" layoutY="106.0" text="Téléphone:" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';"/>
+                <TextField fx:id="txtTelephone" layoutX="510.0" layoutY="102.0" prefWidth="230.0" style="-fx-font-family: 'Arial';"/>
                 <Label layoutX="14.0" layoutY="152.0" text="Email:" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';"/>
                 <TextField fx:id="txtEmail" layoutX="120.0" layoutY="148.0" prefWidth="200.0" style="-fx-font-family: 'Arial';"/>
                 <Label layoutX="350.0" layoutY="152.0" text="Traitement en Cours:" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';"/>
