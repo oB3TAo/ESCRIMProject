@@ -38,42 +38,46 @@ public class PersonnelController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        initializeComboBox();
+
         Connect();
-        table();
-
-        // Add listener to cmbType ComboBox
-        cmbType.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            if ("Medecin".equals(newVal)) {
-                txtSpecialite.setDisable(false); // Enable Spécialité TextField
-                txtSpecialite.setPromptText("Required");
-            } else {
-                txtSpecialite.setDisable(true); // Disable Spécialité TextField
-                txtSpecialite.setPromptText(""); // Remove prompt text
-            }
-        });
-
-        // Add listener to table TableView
-        table.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal != null) {
-                // Update TextField and ComboBox values with selected row's data
-                txtNom.setText(newVal.getNom());
-                txtEmail.setText(newVal.getEmail());
-                txtTelephone.setText(newVal.getTelephone());
-                cmbStatut.setValue(newVal.getStatut());
-
-                if (newVal instanceof Medecin) {
-                    txtSpecialite.setText(((Medecin) newVal).getSpecialite());
-                    cmbType.setValue("Medecin");
-                } else if (newVal instanceof Pharmacien) {
-                    txtSpecialite.setText(""); // Clear Spécialité TextField
-                    cmbType.setValue("Pharmacien");
-                } else if (newVal instanceof Logisticien) {
-                    txtSpecialite.setText(""); // Clear Spécialité TextField
-                    cmbType.setValue("Logisticien");
+        if (table != null) {
+            initializeComboBox();
+            table();
+            // Add listener to cmbType ComboBox
+            cmbType.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+                if ("Medecin".equals(newVal)) {
+                    txtSpecialite.setDisable(false); // Enable Spécialité TextField
+                    txtSpecialite.setPromptText("Required");
+                } else {
+                    txtSpecialite.setDisable(true); // Disable Spécialité TextField
+                    txtSpecialite.setPromptText(""); // Remove prompt text
                 }
-            }
-        });
+            });
+
+            // Add listener to table TableView
+            table.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+                if (newVal != null) {
+                    // Update TextField and ComboBox values with selected row's data
+                    txtNom.setText(newVal.getNom());
+                    txtEmail.setText(newVal.getEmail());
+                    txtTelephone.setText(newVal.getTelephone());
+                    cmbStatut.setValue(newVal.getStatut());
+
+                    if (newVal instanceof Medecin) {
+                        txtSpecialite.setText(((Medecin) newVal).getSpecialite());
+                        cmbType.setValue("Medecin");
+                    } else if (newVal instanceof Pharmacien) {
+                        txtSpecialite.setText(""); // Clear Spécialité TextField
+                        cmbType.setValue("Pharmacien");
+                    } else if (newVal instanceof Logisticien) {
+                        txtSpecialite.setText(""); // Clear Spécialité TextField
+                        cmbType.setValue("Logisticien");
+                    }
+                }
+            });
+        }else {
+            Logger.getLogger(PatientController.class.getName()).log(Level.SEVERE, "TableView is not initialized");
+        }
     }
 
 
