@@ -94,7 +94,7 @@ public class PatientController implements Initializable {
     private void connectDatabase() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/escrim", "root", "GtAlMsS=32=460M");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/escrim", "root", "MySQL_B3TA90");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(PatientController.class.getName()).log(Level.SEVERE, null, ex);
             showAlert("Error Connecting: " + ex.getMessage());

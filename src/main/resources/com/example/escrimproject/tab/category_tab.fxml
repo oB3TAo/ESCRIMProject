@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escrimproject.CategoryController">
+    <children>
+        <TableView fx:id="tableCategories" layoutX="20" layoutY="20" prefHeight="200" prefWidth="300">
+            <columns>
+                <TableColumn fx:id="colCategoryId" text="ID" prefWidth="50"/>
+                <TableColumn fx:id="colCategoryName" text="Name" prefWidth="150"/>
+                <TableColumn fx:id="colCategoryDescription" text="Description" prefWidth="100"/>
+            </columns>
+        </TableView>
+        <TextField fx:id="txtCategoryName" layoutX="20" layoutY="230" prefWidth="150"/>
+        <TextField fx:id="txtCategoryDescription" layoutX="180" layoutY="230" prefWidth="150"/>
+        <Button fx:id="btnAddCategory" text="Add" layoutX="340" layoutY="230"/>
+        <Button fx:id="btnUpdateCategory" text="Update" layoutX="340" layoutY="260"/>
+        <Button fx:id="btnDeleteCategory" text="Delete" layoutX="340" layoutY="290"/>
+    </children>
+</AnchorPane>
+
