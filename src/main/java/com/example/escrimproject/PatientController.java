@@ -153,7 +153,7 @@ public class PatientController implements Initializable {
     }
 
     @FXML
-    private void addPatient(ActionEvent event) {
+    private void Add(ActionEvent event) {
         String sql = "INSERT INTO Patient (Nom, Date_de_Naissance, Sexe, Numero_Securite_Social, Adresse, Numero_Telephone, Email, Traitement_en_Cours, Diagnostic, Statut, ID_Personnel) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement pst = con.prepareStatement(sql);
@@ -185,7 +185,7 @@ public class PatientController implements Initializable {
     }
 
     @FXML
-    void updatePatient(ActionEvent event) {
+    void Update(ActionEvent event) {
         if (table.getSelectionModel().getSelectedItem() != null) {
             Patient selectedPatient = table.getSelectionModel().getSelectedItem();
             String sql = "UPDATE Patient SET Nom=?, Date_de_Naissance=?, Sexe=?, Numero_Securite_Social=?, Adresse=?, Numero_Telephone=?, Email=?, Traitement_en_Cours=?, Diagnostic=?, Statut=?, ID_Personnel=? WHERE ID_Patient=?";
@@ -223,7 +223,7 @@ public class PatientController implements Initializable {
     }
 
     @FXML
-    void deletePatient(ActionEvent event) {
+    void Delete(ActionEvent event) {
         if (table.getSelectionModel().getSelectedItem() != null) {
             Patient selectedPatient = table.getSelectionModel().getSelectedItem();
             String sql = "DELETE FROM Patient WHERE ID_Patient=?";
