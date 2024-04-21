@@ -9,11 +9,11 @@ USE escrim;
 
 -- Create tables in the ESCRIM schema
 
-CREATE TABLE Categorie (
-                           ID_Categorie  INT(10) NOT NULL AUTO_INCREMENT,
-                           Nom_Categorie VARCHAR(255),
+CREATE TABLE Category (
+                           ID_Category  INT(10) NOT NULL AUTO_INCREMENT,
+                           Name VARCHAR(255),
                            Description   VARCHAR(255),
-                           PRIMARY KEY (ID_Categorie)
+                           PRIMARY KEY (ID_Category)
 );
 
 CREATE TABLE Commande (
@@ -67,7 +67,7 @@ CREATE TABLE Personnel (
 
 CREATE TABLE Produit (
                          Nom              VARCHAR(255),
-                         ID_Categorie     INT(10) NOT NULL,
+                         ID_Category     INT(10) NOT NULL,
                          Poids            FLOAT,
                          Quantite         INT(11),
                          DateDePeremption DATE,
@@ -97,7 +97,7 @@ ALTER TABLE Commande
     ADD CONSTRAINT FK_Commande_Produit FOREIGN KEY (ID_Produit) REFERENCES Produit (ID_Produit);
 
 ALTER TABLE Produit
-    ADD CONSTRAINT FK_Produit_Categorie FOREIGN KEY (ID_Categorie) REFERENCES Categorie (ID_Categorie);
+    ADD CONSTRAINT FK_Produit_Categorie FOREIGN KEY (ID_Category) REFERENCES category (ID_Category);
 
 ALTER TABLE Patient
     ADD CONSTRAINT FK_Patient_Personnel FOREIGN KEY (ID_Personnel) REFERENCES Personnel (ID_Personnel);

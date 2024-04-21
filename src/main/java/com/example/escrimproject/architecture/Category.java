@@ -5,14 +5,14 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Categorie {
+public class Category {
     private final IntegerProperty id;
-    private final StringProperty nom;
+    private final StringProperty name;
     private final StringProperty description;
 
-    public Categorie() {
+    public Category() {
         this.id = new SimpleIntegerProperty();
-        this.nom = new SimpleStringProperty();
+        this.name = new SimpleStringProperty();
         this.description = new SimpleStringProperty();
     }
 
@@ -28,16 +28,16 @@ public class Categorie {
         this.id.set(id);
     }
 
-    public StringProperty nomProperty() {
-        return nom;
+    public StringProperty nameProperty() {
+        return name;
     }
 
-    public String getNom() {
-        return nom.get();
+    public String getName() {
+        return name.get();
     }
 
-    public void setNom(String nom) {
-        this.nom.set(nom);
+    public void setName(String name) {
+        this.name.set(name);
     }
 
     public StringProperty descriptionProperty() {
