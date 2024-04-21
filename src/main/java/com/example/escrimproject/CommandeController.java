@@ -64,6 +64,8 @@ public class CommandeController {
                 && idPersonnelCol != null && idProduitCol != null;
     }
 
+    //test
+
     private void connectDatabase() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
