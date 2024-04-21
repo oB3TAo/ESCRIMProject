@@ -73,14 +73,7 @@ CREATE TABLE Produit (
                          DateDePeremption DATE,
                          Type_Prod        VARCHAR(255),  -- New column to identify personnel type
                          ID_Produit       INT(11) NOT NULL AUTO_INCREMENT,
-                         ID_Commande      INT(11) NOT NULL,
-                         ID_Stock         INT(11) NOT NULL,
                          PRIMARY KEY (ID_Produit)
-);
-
-CREATE TABLE Stock (
-                       ID_Stock INT(11) NOT NULL AUTO_INCREMENT,
-                       PRIMARY KEY (ID_Stock)
 );
 
 CREATE TABLE User (
@@ -100,8 +93,8 @@ ALTER TABLE User
 ALTER TABLE Commande
     ADD CONSTRAINT FK_Commande_Personnel FOREIGN KEY (ID_Personnel) REFERENCES Personnel (ID_Personnel);
 
-ALTER TABLE Produit
-    ADD CONSTRAINT FK_Produit_Commande FOREIGN KEY (ID_Commande) REFERENCES Commande (ID_Commande);
+ALTER TABLE Commande
+    ADD CONSTRAINT FK_Commande_Produit FOREIGN KEY (ID_Produit) REFERENCES Produit (ID_Produit);
 
 ALTER TABLE Produit
     ADD CONSTRAINT FK_Produit_Categorie FOREIGN KEY (ID_Categorie) REFERENCES Categorie (ID_Categorie);
@@ -109,5 +102,3 @@ ALTER TABLE Produit
 ALTER TABLE Patient
     ADD CONSTRAINT FK_Patient_Personnel FOREIGN KEY (ID_Personnel) REFERENCES Personnel (ID_Personnel);
 
-ALTER TABLE Produit
-    ADD CONSTRAINT FK_Produit_Stock FOREIGN KEY (ID_Stock) REFERENCES Stock (ID_Stock);

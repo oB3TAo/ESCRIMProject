@@ -10,6 +10,6 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.escrimproject.ProduitController"
             prefHeight="400.0" prefWidth="600.0">
-    <fx:include fx:id="produitTabContent" source="produit_tab.fxml"/>
+    <fx:include fx:id="produitTabContent" source="tab/produit_tab.fxml"/>
 
 </AnchorPane>
