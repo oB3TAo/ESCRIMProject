@@ -1,5 +1,6 @@
 package com.example.escrimproject;
 
+import com.example.escrimproject.architecture.Fournisseur;
 import com.example.escrimproject.architecture.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,16 +18,16 @@ import java.util.logging.Logger;
 public class UserController implements Initializable {
 
     @FXML
-    private TableColumn<?, ?> IdPersColmn;
+    private TableColumn<User, String> IdPersColmn;
 
     @FXML
-    private TableColumn<?, ?> PasswordColmn;
+    private TableColumn<User, String> PasswordColmn;
 
     @FXML
-    private TableColumn<?, ?> TypeColmn;
+    private TableColumn<User, String> TypeColmn;
 
     @FXML
-    private TableColumn<?, ?> UsernameColmn;
+    private TableColumn<User, String> UsernameColmn;
 
     @FXML
     private Button btnAdd;
@@ -63,7 +64,7 @@ public class UserController implements Initializable {
             table();
             // Initialize ComboBox with personnel IDs
             initializeComboBox();
-        }else {
+        } else {
             Logger.getLogger(PatientController.class.getName()).log(Level.SEVERE, "TableView is not initialized");
         }
 
@@ -110,7 +111,7 @@ public class UserController implements Initializable {
         }
 
         try {
-            String sql = "INSERT INTO User (username, password, role, ID_Personnel) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO user (username, password, role, ID_Personnel) VALUES (?, ?, ?, ?)";
             pst = con.prepareStatement(sql);
             pst.setString(1, username);
             pst.setString(2, password);
@@ -138,7 +139,7 @@ public class UserController implements Initializable {
         String username = selectedItem.getUsername();
 
         try {
-            String sql = "DELETE FROM User WHERE username = ?";
+            String sql = "DELETE FROM user WHERE username = ?";
             pst = con.prepareStatement(sql);
             pst.setString(1, username);
             pst.executeUpdate();
@@ -163,7 +164,7 @@ public class UserController implements Initializable {
         String role = txtRole.getText();
 
         try {
-            String sql = "UPDATE User SET password = ?, role = ? WHERE username = ?";
+            String sql = "UPDATE user SET password = ?, role = ? WHERE username = ?";
             pst = con.prepareStatement(sql);
             pst.setString(1, password);
             pst.setString(2, role);
@@ -195,22 +196,23 @@ public class UserController implements Initializable {
     public void table() {
         ObservableList<User> users = FXCollections.observableArrayList();
         try {
-            String sql = "SELECT * FROM User";
-            pst = con.prepareStatement(sql);
+            pst = con.prepareStatement("SELECT * FROM User");
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                String role = rs.getString("role");
-                User user = new User(username, password, role);
-                users.add(user);
+                User user = new User(); // Create a new User object for each row
+                user.setUsername(rs.getString("Username"));
+                user.setPassword(rs.getString("Password"));
+                user.setRole(rs.getString("Role"));
+                // If there are more properties to set, continue setting them here
+                users.add(user); // Add the user object to the list
             }
-            table.setItems(users);
-        } catch (SQLException ex) {
-            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
-            showAlert("Error: " + ex.getMessage());
+            table.setItems(users); // Set the items of the TableView to the list of users
+        } catch (SQLException e) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, e);
+            showAlert("Error loading data: " + e.getMessage());
         }
     }
+
 
     public void Connect() {
         try {

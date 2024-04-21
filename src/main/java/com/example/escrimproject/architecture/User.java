@@ -1,49 +1,55 @@
 package com.example.escrimproject.architecture;
 
+import javafx.beans.property.*;
+
 public class User {
-    private String username;
-    private String password;
-    private String role;
+    private final StringProperty username;
+    private final StringProperty password;
+    private final StringProperty role;
 
     // Constructor
-    public User(String username, String password, String role) {
-        this.username = username;
-        this.password = password;
-        this.role = role;
+    public User() {
+        username = new SimpleStringProperty();
+        password = new SimpleStringProperty();
+        role = new SimpleStringProperty();
     }
 
-    // Getters and Setters
-    public String getUsername() {
+    // Username property
+    public StringProperty usernameProperty() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getUsername() {
+        return username.get();
     }
 
-    public String getPassword() {
+    public void setUsername(String username) {
+        this.username.set(username);
+    }
+
+    // Password property
+    public StringProperty passwordProperty() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public String getPassword() {
+        return password.get();
     }
 
-    public String getRole() {
+    public void setPassword(String password) {
+        this.password.set(password);
+    }
+
+    // Role property
+    public StringProperty roleProperty() {
         return role;
     }
 
+    public String getRole() {
+        return role.get();
+    }
+
     public void setRole(String role) {
-        this.role = role;
-    }
-
-    // Methods for login and logout
-    public void login() {
-        // Implement login logic here
-    }
-
-    public void logout() {
-        // Implement logout logic here
+        this.role.set(role);
     }
 }
-
