@@ -10,12 +10,17 @@ public abstract class Produit {
     private final StringProperty nom;
     private final StringProperty poids;
     private final StringProperty quantite;
+    private final StringProperty type;
+    private final StringProperty categoryId;
+
 
     public Produit() {
         this.id = new SimpleIntegerProperty();
         this.nom = new SimpleStringProperty();
         this.poids = new SimpleStringProperty();
         this.quantite = new SimpleStringProperty();
+        this.type = new SimpleStringProperty();
+        this.categoryId = new SimpleStringProperty();
     }
 
     public IntegerProperty idProperty() {
@@ -65,4 +70,27 @@ public abstract class Produit {
     public void setQuantite(float quantite) {
         this.quantite.set(String.valueOf(quantite));
     }
+
+    public String getType() {
+        return type.get();
+    }
+
+    public StringProperty typeProperty() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type.set(String.valueOf(type));
+    }
+
+    public String getCategoryId() {
+        return categoryId.get();
+    }
+
+    public StringProperty categoryIdProperty() {
+        return categoryId;
+    }
+    public void setCategoryId(String categoryId) {
+        this.categoryId.set(String.valueOf(categoryId));
+    }
+
 }

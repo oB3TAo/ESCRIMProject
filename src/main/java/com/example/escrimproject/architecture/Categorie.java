@@ -1,31 +1,54 @@
 package com.example.escrimproject.architecture;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Categorie {
-    private int id_Categorie;
-    private String nom_Categorie;
-    private String description;
+    private final IntegerProperty id;
+    private final StringProperty nom;
+    private final StringProperty description;
 
-    public int getId_Categorie() {
-        return id_Categorie;
+    public Categorie() {
+        this.id = new SimpleIntegerProperty();
+        this.nom = new SimpleStringProperty();
+        this.description = new SimpleStringProperty();
     }
 
-    public void setId_Categorie(int id_Categorie) {
-        this.id_Categorie = id_Categorie;
+    public IntegerProperty idProperty() {
+        return id;
     }
 
-    public String getNom_Categorie() {
-        return nom_Categorie;
+    public int getId() {
+        return id.get();
     }
 
-    public void setNom_Categorie(String nom_Categorie) {
-        this.nom_Categorie = nom_Categorie;
+    public void setId(int id) {
+        this.id.set(id);
     }
 
-    public String getDescription() {
+    public StringProperty nomProperty() {
+        return nom;
+    }
+
+    public String getNom() {
+        return nom.get();
+    }
+
+    public void setNom(String nom) {
+        this.nom.set(nom);
+    }
+
+    public StringProperty descriptionProperty() {
         return description;
     }
 
+    public String getDescription() {
+        return description.get();
+    }
+
     public void setDescription(String description) {
-        this.description = description;
+        this.description.set(description);
     }
 }
