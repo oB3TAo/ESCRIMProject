@@ -125,7 +125,7 @@ public class ProduitController implements Initializable {
 
         try {
             int categoryId = Integer.parseInt(categorySelection.split(" - ")[0]);
-            String sql = "INSERT INTO Produit(Nom, ID_Categorie, Poids, Quantite, Type_Prod, DateDePeremption) VALUES (?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO Produit(Nom, ID_Category, Poids, Quantite, Type_Prod, DateDePeremption) VALUES (?, ?, ?, ?, ?, ?)";
             pst = con.prepareStatement(sql);
             pst.setString(1, nom);
             pst.setInt(2, categoryId);
@@ -210,16 +210,16 @@ public class ProduitController implements Initializable {
                 showAlert("Database connection is null.");
                 return;
             } else {
-                String sql = "SELECT ID_Categorie, Nom_Categorie FROM categorie";
+                String sql = "SELECT ID_Category, Name FROM category";
                 pst = con.prepareStatement(sql);
                 ResultSet rs = pst.executeQuery();
                 while (rs.next()) {
-                    cmbCategory.getItems().add(rs.getInt("ID_Categorie") + " - " + rs.getString("Nom_Categorie"));
+                    cmbCategory.getItems().add(rs.getInt("ID") + " - " + rs.getString("Name"));
                 }
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProduitController.class.getName()).log(Level.SEVERE, null, ex);
-            showAlert("Error loading categories: " + ex.getMessage());
+            showAlert("Error loading category: " + ex.getMessage());
         }
 
     }
@@ -268,7 +268,7 @@ public class ProduitController implements Initializable {
     public void table() {
         ObservableList<Produit> produits = FXCollections.observableArrayList();
         try {
-            pst = con.prepareStatement("SELECT p.ID_Produit, p.Nom, p.Poids, p.Quantite, p.DateDePeremption, p.Type_Prod, c.ID_Categorie FROM Produit p JOIN Categorie c ON p.ID_Categorie = c.ID_Categorie");
+            pst = con.prepareStatement("SELECT p.ID_Produit, p.Nom, p.Poids, p.Quantite, p.DateDePeremption, p.Type_Prod, c.ID_Category FROM Produit p JOIN Category c ON p.ID_Category = c.ID_Category");
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 String type = rs.getString("Type_Prod");
@@ -289,7 +289,7 @@ public class ProduitController implements Initializable {
                 p.setPoids(rs.getFloat("Poids"));
                 p.setQuantite(rs.getInt("Quantite"));
                 p.setType(rs.getString("Type_Prod"));
-                p.setCategoryId(String.valueOf(rs.getInt("ID_Categorie")));
+                p.setCategoryId(String.valueOf(rs.getInt("ID_Category")));
                 produits.add(p);
             }
             table.setItems(produits);
