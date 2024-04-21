@@ -1,11 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            prefWidth="400" prefHeight="300">
-
-    <Label text="Commandes Tab" layoutX="100" layoutY="100"/>
-
+<AnchorPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escrimproject.CommandeController" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: linear-gradient(to bottom, #e0eafc, #cfdef3);">
+    <children>
+        <Label layoutX="20.0" layoutY="10.0" text="Commande Management" style="-fx-font-size: 24px; -fx-text-fill: #2c3e50; -fx-font-family: 'Arial';">
+        </Label>
+        <Pane layoutX="20.0" layoutY="50.0" prefHeight="200.0" prefWidth="860.0" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-color: #d6e6f2; -fx-border-width: 1; -fx-border-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.16), 10, 0, 0, 10);">
+            <children>
+                <TableView fx:id="table" layoutX="14.0" layoutY="14.0" prefHeight="172.0" prefWidth="832.0" style="-fx-font-family: 'Arial';">
+                    <columns>
+                        <TableColumn fx:id="idCommandeCol" text="ID Commande" prefWidth="100.0"/>
+                        <TableColumn fx:id="dateCommandeCol" text="Date Commande" prefWidth="150.0"/>
+                        <TableColumn fx:id="dateLivraisonPrevueCol" text="Date Livraison Prévue" prefWidth="150.0"/>
+                        <TableColumn fx:id="statutCommandeCol" text="Statut Commande" prefWidth="150.0"/>
+                        <TableColumn fx:id="montantTotalCol" text="Montant Total" prefWidth="150.0"/>
+                        <TableColumn fx:id="idFournisseurCol" text="ID Fournisseur" prefWidth="100.0"/>
+                        <TableColumn fx:id="idPersonnelCol" text="ID Personnel" prefWidth="100.0"/>
+                        <TableColumn fx:id="idProduitCol" text="ID Produit" prefWidth="100.0"/>
+                    </columns>
+                </TableView>
+            </children>
+        </Pane>
+        <Pane layoutX="20.0" layoutY="260.0" prefHeight="330.0" prefWidth="860.0" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-color: #d6e6f2; -fx-border-width: 1; -fx-border-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.16), 10, 0, 0, 10);">
+            <children>
+                <Label layoutX="14.0" layoutY="14.0" text="Date Commande:" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';"/>
+                <DatePicker fx:id="txtDateCommande" layoutX="180.0" layoutY="10.0" prefWidth="200.0" style="-fx-font-family: 'Arial';"/>
+                <Label layoutX="400.0" layoutY="14.0" text="Date Livraison Prévue:" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';"/>
+                <DatePicker fx:id="txtDateLivraisonPrevue" layoutX="580.0" layoutY="10.0" prefWidth="200.0" style="-fx-font-family: 'Arial';"/>
+                <Label layoutX="14.0" layoutY="60.0" text="Statut Commande:" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';"/>
+                <TextField fx:id="txtStatutCommande" layoutX="180.0" layoutY="56.0" prefWidth="200.0" style="-fx-font-family: 'Arial';"/>
+                <Label layoutX="400.0" layoutY="60.0" text="Montant Total:" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';"/>
+                <TextField fx:id="txtMontantTotal" layoutX="580.0" layoutY="56.0" prefWidth="200.0" style="-fx-font-family: 'Arial';"/>
+                <Label layoutX="14.0" layoutY="106.0" text="ID Fournisseur:" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';"/>
+                <TextField fx:id="txtIdFournisseur" layoutX="180.0" layoutY="102.0" prefWidth="200.0" style="-fx-font-family: 'Arial';"/>
+                <Label layoutX="400.0" layoutY="106.0" text="ID Personnel:" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';"/>
+                <TextField fx:id="txtIdPersonnel" layoutX="580.0" layoutY="102.0" prefWidth="200.0" style="-fx-font-family: 'Arial';"/>
+                <Label layoutX="14.0" layoutY="152.0" text="ID Produit:" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';"/>
+                <TextField fx:id="txtIdProduit" layoutX="180.0" layoutY="148.0" prefWidth="600.0" style="-fx-font-family: 'Arial';"/>
+                <!-- Buttons for actions -->
+                <ButtonBar layoutX="14.0" layoutY="200.0" prefWidth="832.0">
+                    <buttons>
+                        <Button fx:id="btnAdd" text="Add" onAction="#Add" prefWidth="100.0" style="-fx-background-color: linear-gradient(to bottom, #2ecc71, #27ae60); -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5; -fx-font-family: 'Arial';"/>
+                        <Button fx:id="btnUpdate" text="Update" onAction="#Update" prefWidth="100.0" style="-fx-background-color: linear-gradient(to bottom, #f39c12, #d35400); -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5; -fx-font-family: 'Arial';"/>
+                        <Button fx:id="btnDelete" text="Delete" onAction="#Delete" prefWidth="100.0" style="-fx-background-color: linear-gradient(to bottom, #e74c3c, #c0392b); -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5; -fx-font-family: 'Arial';"/>
+                    </buttons>
+                </ButtonBar>
+            </children>
+        </Pane>
+    </children>
 </AnchorPane>
