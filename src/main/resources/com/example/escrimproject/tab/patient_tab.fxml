@@ -54,9 +54,9 @@
                 <!-- Existing buttons -->
                 <ButtonBar layoutX="14.0" layoutY="290.0" prefWidth="832.0">
                     <buttons>
-                        <Button fx:id="btnAdd" text="Add" onAction="#addPatient" prefWidth="100.0" style="-fx-background-color: linear-gradient(to bottom, #2ecc71, #27ae60); -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5; -fx-font-family: 'Arial';"/>
-                        <Button fx:id="btnUpdate" text="Update" onAction="#updatePatient" prefWidth="100.0" style="-fx-background-color: linear-gradient(to bottom, #f39c12, #d35400); -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5; -fx-font-family: 'Arial';"/>
-                        <Button fx:id="btnDelete" text="Delete" onAction="#deletePatient" prefWidth="100.0" style="-fx-background-color: linear-gradient(to bottom, #e74c3c, #c0392b); -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5; -fx-font-family: 'Arial';"/>
+                        <Button fx:id="btnAdd" text="Add" onAction="#Add" prefWidth="100.0" style="-fx-background-color: linear-gradient(to bottom, #2ecc71, #27ae60); -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5; -fx-font-family: 'Arial';"/>
+                        <Button fx:id="btnUpdate" text="Update" onAction="#Update" prefWidth="100.0" style="-fx-background-color: linear-gradient(to bottom, #f39c12, #d35400); -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5; -fx-font-family: 'Arial';"/>
+                        <Button fx:id="btnDelete" text="Delete" onAction="#Delete" prefWidth="100.0" style="-fx-background-color: linear-gradient(to bottom, #e74c3c, #c0392b); -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5; -fx-font-family: 'Arial';"/>
                     </buttons>
                 </ButtonBar>
             </children>

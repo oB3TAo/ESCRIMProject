@@ -6,6 +6,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="696.0"
             prefWidth="1034.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.escrimproject.AdminController">
+            fx:controller="com.example.escrimproject.PersonnelController">
     <fx:include fx:id="personnelTabContent" source="tab/personnel_tab.fxml"/>
 </AnchorPane>
