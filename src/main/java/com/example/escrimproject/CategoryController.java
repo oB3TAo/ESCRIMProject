@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CategoryController {
 
@@ -34,7 +36,12 @@ public class CategoryController {
     @FXML
     public void initialize() {
         connectToDatabase();
-        initializeTableView();
+        if (tableCategories != null) {
+            initializeTableView();
+        } else {
+            Logger.getLogger(PatientController.class.getName()).log(Level.SEVERE, "TableView is not initialized");
+        }
+
     }
 
     private void connectToDatabase() {
@@ -75,7 +82,7 @@ public class CategoryController {
     }
 
     @FXML
-    private void handleAddCategory() {
+    private void Add() {
         String categoryName = txtCategoryName.getText().trim();
         String categoryDescription = txtCategoryDescription.getText().trim();
 
@@ -100,7 +107,7 @@ public class CategoryController {
     }
 
     @FXML
-    private void handleUpdateCategory() {
+    private void Update() {
         Categorie selectedCategory = tableCategories.getSelectionModel().getSelectedItem();
         if (selectedCategory == null) {
             showAlert("Please select a category to update.");
@@ -132,7 +139,7 @@ public class CategoryController {
     }
 
     @FXML
-    private void handleDeleteCategory() {
+    private void Delete() {
         Categorie selectedCategory = tableCategories.getSelectionModel().getSelectedItem();
         if (selectedCategory == null) {
             showAlert("Please select a category to delete.");

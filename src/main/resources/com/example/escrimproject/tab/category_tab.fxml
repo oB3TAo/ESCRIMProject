@@ -14,8 +14,8 @@
         </TableView>
         <TextField fx:id="txtCategoryName" layoutX="20" layoutY="230" prefWidth="150" />
         <TextField fx:id="txtCategoryDescription" layoutX="180" layoutY="230" prefHeight="77.0" prefWidth="150" />
-        <Button fx:id="btnAddCategory" layoutX="330.0" layoutY="20.0" text="Add" />
-        <Button fx:id="btnUpdateCategory" layoutX="330.0" layoutY="50.0" text="Update" />
-        <Button fx:id="btnDeleteCategory" layoutX="330.0" layoutY="80.0" text="Delete" />
+        <Button fx:id="Add" layoutX="330.0" layoutY="20.0" text="Add" />
+        <Button fx:id="Update" layoutX="330.0" layoutY="50.0" text="Update" />
+        <Button fx:id="Delete" layoutX="330.0" layoutY="80.0" text="Delete" />
     </children>
 </AnchorPane>
