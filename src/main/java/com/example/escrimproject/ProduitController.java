@@ -65,46 +65,49 @@ public class ProduitController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Connect();
-        table();
-        initializeComboBox();
-        loadCategories(); // Load categories into the ComboBox
-
-        // Add listener to cmbType ComboBox
-        cmbType.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            if ("Medicament".equals(newVal)) {
-                dateDDP.setDisable(false); // Enable dateDDP TextField
-                dateDDP.setPromptText("Required");
-            } else {
-                dateDDP.setDisable(true); // Disable dateDDP TextField
-                dateDDP.setPromptText(""); // Remove prompt text
-            }
-        });
-
-        // Add listener to table TableView
-        table.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal != null) {
-                // Update TextField and ComboBox values with selected row's data
-                txtNom.setText(newVal.getNom());
-                txtPoids.setText(String.valueOf(newVal.getPoids()));
-                txtQuantite.setText(String.valueOf(newVal.getQuantite()));
-                cmbType.setValue(newVal.getType());
-
-                if (newVal instanceof Medicament) {
-                    dateDDP.setValue(LocalDate.parse(((Medicament) newVal).getDateDePeremption()));
-                    cmbType.setValue("Medicament");
-                } else if (newVal instanceof Materiel) {
-                    dateDDP.setValue(null); // Clear DatePicker
-                    cmbType.setValue("Materiel");
+        if (table != null) {
+            initializeComboBox();
+            table();
+            loadCategories(); // Load categories into the ComboBox
+            // Add listener to cmbType ComboBox
+            cmbType.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+                if ("Medicament".equals(newVal)) {
+                    dateDDP.setDisable(false); // Enable dateDDP TextField
+                    dateDDP.setPromptText("Required");
+                } else {
+                    dateDDP.setDisable(true); // Disable dateDDP TextField
+                    dateDDP.setPromptText(""); // Remove prompt text
                 }
-            }
-        });
-        cmbCategory.setOnAction(event -> {
-            String selectedCategory = cmbCategory.getValue();
-            if (selectedCategory != null && selectedCategory.equals("Add New Category...")) {
-                // Switch to the Category tab
-                switchToCategoryTab();
-            }
-        });
+            });
+
+            // Add listener to table TableView
+            table.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+                if (newVal != null) {
+                    // Update TextField and ComboBox values with selected row's data
+                    txtNom.setText(newVal.getNom());
+                    txtPoids.setText(String.valueOf(newVal.getPoids()));
+                    txtQuantite.setText(String.valueOf(newVal.getQuantite()));
+                    cmbType.setValue(newVal.getType());
+
+                    if (newVal instanceof Medicament) {
+                        dateDDP.setValue(LocalDate.parse(((Medicament) newVal).getDateDePeremption()));
+                        cmbType.setValue("Medicament");
+                    } else if (newVal instanceof Materiel) {
+                        dateDDP.setValue(null); // Clear DatePicker
+                        cmbType.setValue("Materiel");
+                    }
+                }
+            });
+            cmbCategory.setOnAction(event -> {
+                String selectedCategory = cmbCategory.getValue();
+                if (selectedCategory != null && selectedCategory.equals("Add New Category...")) {
+                    // Switch to the Category tab
+                    switchToCategoryTab();
+                }
+            });
+        }else {
+            Logger.getLogger(PatientController.class.getName()).log(Level.SEVERE, "TableView is not initialized");
+        }
     }
 
     @FXML
@@ -310,7 +313,7 @@ public class ProduitController implements Initializable {
     private void switchToCategoryTab() {
         try {
             // Load the Category tab FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("category_tab.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("tab/category_tab.fxml"));
             Parent categoryTabContent = loader.load();
 
             // Create a new Stage for the Category tab

@@ -58,10 +58,15 @@ public class UserController implements Initializable {
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
         Connect();
-        // Populate the table with data from the database
-        table();
-        // Initialize ComboBox with personnel IDs
-        initializeComboBox();
+        if (table!=null){
+            // Populate the table with data from the database
+            table();
+            // Initialize ComboBox with personnel IDs
+            initializeComboBox();
+        }else {
+            Logger.getLogger(PatientController.class.getName()).log(Level.SEVERE, "TableView is not initialized");
+        }
+
 
     }
 
