@@ -73,7 +73,7 @@ public class UserController implements Initializable {
                     txtRole.setText(newVal.getRole());
                 }
             });
-        }else {
+        } else {
             Logger.getLogger(PatientController.class.getName()).log(Level.SEVERE, "TableView is not initialized");
         }
     }
