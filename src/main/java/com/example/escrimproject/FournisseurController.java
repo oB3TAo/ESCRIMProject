@@ -7,6 +7,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import java.sql.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.Node;
+import java.io.IOException;
+
 
 public class FournisseurController {
 
@@ -65,6 +72,26 @@ public class FournisseurController {
             System.err.println("Error: " + e.getMessage());
         }
     }
+
+    @FXML
+    private void handleLogout(ActionEvent event) {
+        try {
+            // Load the login view
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("login-view.fxml"));
+            Parent root = loader.load();
+
+            // Get the current stage from the action event triggered by the button
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the login scene
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void setupCellValueFactories() {
         IDFournisseurColmn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
