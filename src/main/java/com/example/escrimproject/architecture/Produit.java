@@ -67,7 +67,7 @@ public abstract class Produit {
         return quantite.get();
     }
 
-    public void setQuantite(float quantite) {
+    public void setQuantite(int quantite) {
         this.quantite.set(String.valueOf(quantite));
     }
 

@@ -1,7 +1,6 @@
 package com.example.escrimproject;
 
-import com.example.escrimproject.architecture.Fournisseur;
-import com.example.escrimproject.architecture.User;
+import com.example.escrimproject.architecture.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -64,11 +63,19 @@ public class UserController implements Initializable {
             table();
             // Initialize ComboBox with personnel IDs
             initializeComboBox();
-        } else {
+
+            // Add listener to table TableView
+            table.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+                if (newVal != null) {
+                    // Update TextField and ComboBox values with selected row's data
+                    txtUsername.setText(newVal.getUsername());
+                    txtPassword.setText(newVal.getPassword());
+                    txtRole.setText(newVal.getRole());
+                }
+            });
+        }else {
             Logger.getLogger(PatientController.class.getName()).log(Level.SEVERE, "TableView is not initialized");
         }
-
-
     }
 
     private void initializeComboBox() {
@@ -207,10 +214,16 @@ public class UserController implements Initializable {
                 users.add(user); // Add the user object to the list
             }
             table.setItems(users); // Set the items of the TableView to the list of users
+            setCellValueFactories();
         } catch (SQLException e) {
             Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, e);
             showAlert("Error loading data: " + e.getMessage());
         }
+    }
+    private void setCellValueFactories() {
+        UsernameColmn.setCellValueFactory(f -> f.getValue().usernameProperty());
+        PasswordColmn.setCellValueFactory(f -> f.getValue().passwordProperty());
+        TypeColmn.setCellValueFactory(f -> f.getValue().roleProperty());
     }
 
 
