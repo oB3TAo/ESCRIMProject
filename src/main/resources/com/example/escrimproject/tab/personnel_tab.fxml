@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="517.0" prefWidth="802.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escrimproject.PersonnelController" style="-fx-background-color: linear-gradient(to bottom, #e0eafc, #cfdef3);">
+<AnchorPane prefHeight="550.0" prefWidth="802.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escrimproject.PersonnelController" style="-fx-background-color: linear-gradient(to bottom, #e0eafc, #cfdef3);">
     <children>
         <Label layoutX="264.0" layoutY="14.0" text="Personnel Items" style="-fx-font-size: 40px; -fx-text-fill: #2c3e50; -fx-font-family: 'Arial'; -fx-font-weight: bold;">
         </Label>
@@ -67,6 +67,11 @@
                         </Button>
                         <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#Delete" prefHeight="40.0" prefWidth="149.0" text="Delete" style="-fx-background-color: linear-gradient(to bottom, #e74c3c, #c0392b); -fx-text-fill: white; -fx-font-size: 19px; -fx-background-radius: 5; -fx-font-family: 'Arial';">
                         </Button>
+                    </buttons>
+                </ButtonBar>
+                <ButtonBar layoutX="14.0" layoutY="420.0" prefWidth="470.0">
+                    <buttons>
+                        <Button fx:id="logoutButton" text="Déconnexion" onAction="#handleLogout"/>
                     </buttons>
                 </ButtonBar>
             </children>
