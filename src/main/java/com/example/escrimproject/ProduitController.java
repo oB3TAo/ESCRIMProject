@@ -1,6 +1,7 @@
 package com.example.escrimproject;
 
 import com.example.escrimproject.architecture.*;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -105,7 +106,7 @@ public class ProduitController implements Initializable {
                     switchToCategoryTab();
                 }
             });
-        }else {
+        } else {
             Logger.getLogger(PatientController.class.getName()).log(Level.SEVERE, "TableView is not initialized");
         }
     }
@@ -214,7 +215,7 @@ public class ProduitController implements Initializable {
                 pst = con.prepareStatement(sql);
                 ResultSet rs = pst.executeQuery();
                 while (rs.next()) {
-                    cmbCategory.getItems().add(rs.getInt("ID") + " - " + rs.getString("Name"));
+                    cmbCategory.getItems().add(rs.getInt("ID_Category") + " - " + rs.getString("Name"));
                 }
             }
         } catch (SQLException ex) {
@@ -250,10 +251,12 @@ public class ProduitController implements Initializable {
         IdCatColmn.setCellValueFactory(f -> f.getValue().categoryIdProperty());
         DDPColmn.setCellValueFactory(f -> {
             if (f.getValue() instanceof Medicament) {
-                return (ObservableValue<String>) ((Medicament) f.getValue()).dateDePeremptionProperty();
-            } else {
-                return null;
+                Date dateDePeremption = Date.valueOf(((Medicament) f.getValue()).getDateDePeremption());
+                if (dateDePeremption != null) {
+                    return new SimpleStringProperty(dateDePeremption.toString());
+                }
             }
+            return null;
         });
 
         // If you want to display the category name instead of its ID:
