@@ -14,8 +14,15 @@
         </TableView>
         <TextField fx:id="txtCategoryName" layoutX="20" layoutY="230" prefWidth="150" />
         <TextField fx:id="txtCategoryDescription" layoutX="180" layoutY="230" prefHeight="77.0" prefWidth="150" />
-        <Button fx:id="Add" layoutX="330.0" layoutY="20.0" text="Add" />
-        <Button fx:id="Update" layoutX="330.0" layoutY="50.0" text="Update" />
-        <Button fx:id="Delete" layoutX="330.0" layoutY="80.0" text="Delete" />
+        <ButtonBar layoutX="-16.0" layoutY="306.0" prefHeight="111.0" prefWidth="313.0">
+            <buttons>
+                <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#Update" prefHeight="40.0" prefWidth="149.0" style="-fx-background-color: linear-gradient(to bottom, #f39c12, #d35400); -fx-text-fill: white; -fx-font-size: 19px; -fx-background-radius: 5; -fx-font-family: 'Arial';" text="Update">
+                </Button>
+                <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#Delete" prefHeight="40.0" prefWidth="149.0" style="-fx-background-color: linear-gradient(to bottom, #e74c3c, #c0392b); -fx-text-fill: white; -fx-font-size: 19px; -fx-background-radius: 5; -fx-font-family: 'Arial';" text="Delete">
+                </Button>
+                <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#Add" prefHeight="40.0" prefWidth="138.0" style="-fx-background-color: linear-gradient(to bottom, #2ecc71, #27ae60); -fx-text-fill: white; -fx-font-size: 19px; -fx-background-radius: 5; -fx-font-family: 'Arial';" text="Add">
+                </Button>
+            </buttons>
+        </ButtonBar>
     </children>
 </AnchorPane>

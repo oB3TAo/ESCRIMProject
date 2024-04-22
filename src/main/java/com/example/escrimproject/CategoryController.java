@@ -8,16 +8,31 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CategoryController {
 
-    @FXML private TableView<Category> tableCategories;
-    @FXML private TableColumn<Category, Integer> colCategoryId;
-    @FXML private TableColumn<Category, String> colCategoryName;
-    @FXML private TableColumn<Category, String> colCategoryDescription;
+    @FXML
+    private TableView<Category> tableCategories;
+    @FXML
+    private TableColumn<Category, Integer> colCategoryId;
+    @FXML
+    private TableColumn<Category, String> colCategoryName;
+    @FXML
+    private TableColumn<Category, String> colCategoryDescription;
 
-    @FXML private TextField txtCategoryName;
-    @FXML private TextField txtCategoryDescription;
+    @FXML
+    private TextField txtCategoryName;
+    @FXML
+    private TextField txtCategoryDescription;
+
+    @FXML
+    private Button btnAddCategory;
+    @FXML
+    private Button btnDeleteCategory;
+    @FXML
+    private Button btnUpdateCategory;
 
     private Connection con;
     private PreparedStatement pst;
@@ -25,8 +40,9 @@ public class CategoryController {
 
     @FXML
     public void initialize() {
-        if (areComponentsLoaded()) {
-            connectDatabase();
+        connectDatabase();
+        if (tableCategories != null) {
+
             setupCellValueFactories();
             loadTableData();
             tableCategories.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -36,16 +52,9 @@ public class CategoryController {
                     txtCategoryDescription.setText(category.getDescription());
                 }
             });
-
         } else {
-            System.err.println("UI components are not initialized!");
+            Logger.getLogger(PatientController.class.getName()).log(Level.SEVERE, "TableView is not initialized");
         }
-    }
-
-    private boolean areComponentsLoaded() {
-        // Make sure all FX:ID components are not null
-        return tableCategories != null && colCategoryId != null && colCategoryName != null
-                && colCategoryDescription != null;
     }
 
     private void connectDatabase() {
@@ -83,51 +92,69 @@ public class CategoryController {
 
     @FXML
     private void Add(ActionEvent event) {
-        String sql = "INSERT INTO Category (Name, Description) VALUES (?, ?)";
+        String categoryName = txtCategoryName.getText();
+        String categoryDescription = txtCategoryDescription.getText();
+
+        if (categoryName.isEmpty() || categoryDescription.isEmpty()) {
+            showAlert("Please fill in all required fields.");
+            return;
+        }
+
         try {
+            String sql = "INSERT INTO Category (Name, Description) VALUES (?, ?)";
             pst = con.prepareStatement(sql);
-            pst.setString(1, txtCategoryName.getText());
-            pst.setString(2, txtCategoryDescription.getText());
-            int affectedRows = pst.executeUpdate();
-            if (affectedRows > 0) {
-                System.out.println("Category added successfully.");
+            pst.setString(1, categoryName);
+            pst.setString(2, categoryDescription);
+            int rowsAffected = pst.executeUpdate();
+
+            if (rowsAffected > 0) {
+                showAlert("Category Added!");
                 loadTableData();
+                clearFields();
             } else {
-                System.out.println("No category was added.");
+                showAlert("Failed to add category.");
             }
-        } catch (SQLException e) {
-            System.err.println("Failed to add category: " + e.getMessage());
+        } catch (SQLException ex) {
+            showAlert("Error: " + ex.getMessage());
         }
     }
 
     @FXML
-    void Update(ActionEvent event) {
+    private void Update(ActionEvent event) {
         if (tableCategories.getSelectionModel().getSelectedItem() != null) {
             Category selectedCategory = tableCategories.getSelectionModel().getSelectedItem();
+            String categoryName = txtCategoryName.getText();
+            String categoryDescription = txtCategoryDescription.getText();
+
+            if (categoryName.isEmpty() || categoryDescription.isEmpty()) {
+                showAlert("Please fill in all required fields.");
+                return;
+            }
+
             String sql = "UPDATE Category SET Name=?, Description=? WHERE ID_Category=?";
             try {
                 pst = con.prepareStatement(sql);
-                pst.setString(1, txtCategoryName.getText());
-                pst.setString(2, txtCategoryDescription.getText());
+                pst.setString(1, categoryName);
+                pst.setString(2, categoryDescription);
                 pst.setInt(3, selectedCategory.getId());
 
                 int affectedRows = pst.executeUpdate();
                 if (affectedRows > 0) {
-                    System.out.println("Category updated successfully.");
+                    showAlert("Category updated successfully.");
                     loadTableData();
                 } else {
-                    System.out.println("No category was updated.");
+                    showAlert("No category was updated.");
                 }
             } catch (SQLException e) {
-                System.err.println("Failed to update category: " + e.getMessage());
+                showAlert("Failed to update category: " + e.getMessage());
             }
         } else {
-            System.out.println("No category selected for update.");
+            showAlert("No category selected for update.");
         }
     }
 
     @FXML
-    void Delete(ActionEvent event) {
+    private void Delete(ActionEvent event) {
         if (tableCategories.getSelectionModel().getSelectedItem() != null) {
             Category selectedCategory = tableCategories.getSelectionModel().getSelectedItem();
             String sql = "DELETE FROM Category WHERE ID_Category=?";
@@ -137,16 +164,29 @@ public class CategoryController {
 
                 int affectedRows = pst.executeUpdate();
                 if (affectedRows > 0) {
-                    System.out.println("Category deleted successfully.");
+                    showAlert("Category deleted successfully.");
                     loadTableData();
                 } else {
-                    System.out.println("No category was deleted.");
+                    showAlert("No category was deleted.");
                 }
             } catch (SQLException e) {
-                System.err.println("Failed to delete category: " + e.getMessage());
+                showAlert("Failed to delete category: " + e.getMessage());
             }
         } else {
-            System.out.println("No category selected for deletion.");
+            showAlert("No category selected for deletion.");
         }
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Category");
+        alert.setHeaderText("Category");
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void clearFields() {
+        txtCategoryName.clear();
+        txtCategoryDescription.clear();
     }
 }
