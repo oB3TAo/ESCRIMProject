@@ -25,7 +25,7 @@ public class CategoryController {
     @FXML
     private TextField txtCategoryName;
     @FXML
-    private TextField txtCategoryDescription;
+    private TextArea txtCategoryDescription;
 
     @FXML
     private Button btnAddCategory;

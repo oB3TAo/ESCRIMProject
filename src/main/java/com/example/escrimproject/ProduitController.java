@@ -260,7 +260,7 @@ public class ProduitController implements Initializable {
     public void Connect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/escrim", "root", "GtAlMsS=32=460M");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/escrim", "root", "MySQL_B3TA90");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ProduitController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -366,7 +366,7 @@ public class ProduitController implements Initializable {
             Stage categoryStage = new Stage();
             categoryStage.setTitle("Category Tab");
             categoryStage.initModality(Modality.APPLICATION_MODAL);
-            Scene categoryScene = new Scene(categoryTabContent);
+            Scene categoryScene = new Scene(categoryTabContent, 495, 318);
             categoryStage.setScene(categoryScene);
 
             // Show the new Stage

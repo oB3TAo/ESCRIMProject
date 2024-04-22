@@ -97,7 +97,7 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("logisticien_view.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setScene(new Scene(root, 688, 470));
+            stage.setScene(new Scene(root, 900, 516));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -108,7 +108,7 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("pharmacien_view.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setScene(new Scene(root, 688, 470));
+            stage.setScene(new Scene(root, 700, 507));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -119,7 +119,7 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("admin_view.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setScene(new Scene(root, 802, 517));
+            stage.setScene(new Scene(root, 802, 530));
             // Pass any necessary data to the controller of the admin tab if needed
             // AdminController controller = loader.getController();
             // controller.initData(...);

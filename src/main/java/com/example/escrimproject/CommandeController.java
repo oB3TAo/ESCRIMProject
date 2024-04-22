@@ -76,7 +76,7 @@ public class CommandeController {
     private void connectDatabase() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/escrim", "root", "GtAlMsS=32=460M");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/escrim", "root", "MySQL_B3TA90");
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
         }

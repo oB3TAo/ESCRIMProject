@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import java.lang.*?>
-<?import javafx.collections.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="550.0" prefWidth="802.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escrimproject.PersonnelController" style="-fx-background-color: linear-gradient(to bottom, #e0eafc, #cfdef3);">
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="511.0" prefWidth="802.0" style="-fx-background-color: linear-gradient(to bottom, #e0eafc, #cfdef3);" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escrimproject.PersonnelController">
     <children>
-        <Label layoutX="264.0" layoutY="14.0" text="Personnel Items" style="-fx-font-size: 40px; -fx-text-fill: #2c3e50; -fx-font-family: 'Arial'; -fx-font-weight: bold;">
+        <Label layoutX="264.0" layoutY="14.0" style="-fx-font-size: 40px; -fx-text-fill: #2c3e50; -fx-font-family: 'Arial'; -fx-font-weight: bold;" text="Personnel Items">
         </Label>
-        <Pane layoutX="27.0" layoutY="84.0" prefHeight="405.0" prefWidth="262.0" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-color: #d6e6f2; -fx-border-width: 1; -fx-border-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.16), 10, 0, 0, 10);">
+        <Pane layoutX="27.0" layoutY="84.0" prefHeight="314.0" prefWidth="262.0" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-color: #d6e6f2; -fx-border-width: 1; -fx-border-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.16), 10, 0, 0, 10);">
             <children>
-                <Label layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="80.0" text="Nom" style="-fx-font-size: 20px; -fx-text-fill: #34495e;">
+                <Label layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="80.0" style="-fx-font-size: 20px; -fx-text-fill: #34495e;" text="Nom">
                 </Label>
-                <Label layoutX="14.0" layoutY="110.0" prefHeight="32.0" prefWidth="80.0" text="Email" style="-fx-font-size: 20px; -fx-text-fill: #34495e;">
+                <Label layoutX="14.0" layoutY="53.0" prefHeight="32.0" prefWidth="80.0" style="-fx-font-size: 20px; -fx-text-fill: #34495e;" text="Email">
                 </Label>
-                <Label layoutX="14.0" layoutY="175.0" prefHeight="32.0" prefWidth="137.0" text="Telephone" style="-fx-font-size: 20px; -fx-text-fill: #34495e;">
+                <Label layoutX="84.0" layoutY="85.0" prefHeight="32.0" prefWidth="95.0" style="-fx-font-size: 20px; -fx-text-fill: #34495e;" text="Telephone">
                 </Label>
-                <TextField fx:id="txtNom" layoutX="99.0" layoutY="18.0" style="-fx-font-family: 'Arial';"/>
-                <TextField fx:id="txtEmail" layoutX="99.0" layoutY="114.0" style="-fx-font-family: 'Arial';"/>
-                <TextField fx:id="txtTelephone" layoutX="99.0" layoutY="210.0" style="-fx-font-family: 'Arial';"/>
-                <Label layoutX="14.0" layoutY="265.0" prefHeight="32.0" prefWidth="108.0" text="Specialite" style="-fx-font-size: 20px; -fx-text-fill: #34495e;">
+                <TextField fx:id="txtNom" layoutX="99.0" layoutY="18.0" style="-fx-font-family: 'Arial';" />
+                <TextField fx:id="txtEmail" layoutX="99.0" layoutY="57.0" style="-fx-font-family: 'Arial';" />
+                <TextField fx:id="txtTelephone" layoutX="39.0" layoutY="123.0" prefHeight="23.0" prefWidth="185.0" style="-fx-font-family: 'Arial';" />
+                <Label layoutX="85.0" layoutY="159.0" prefHeight="32.0" prefWidth="95.0" style="-fx-font-size: 20px; -fx-text-fill: #34495e;" text="Specialite">
                 </Label>
-                <TextField fx:id="txtSpecialite" layoutX="99.0" layoutY="297.0" style="-fx-font-family: 'Arial';"/>
-                <Label layoutX="14.0" layoutY="337.0" prefHeight="32.0" prefWidth="80.0" text="Type" style="-fx-font-size: 20px; -fx-text-fill: #34495e;">
+                <TextField fx:id="txtSpecialite" layoutX="40.0" layoutY="191.0" prefHeight="23.0" prefWidth="185.0" style="-fx-font-family: 'Arial';" />
+                <Label layoutX="15.0" layoutY="239.0" prefHeight="32.0" prefWidth="80.0" style="-fx-font-size: 20px; -fx-text-fill: #34495e;" text="Type">
                 </Label>
-                <ComboBox fx:id="cmbType" layoutX="99.0" layoutY="341.0" style="-fx-background-color: #ecf0f1; -fx-font-family: 'Arial';">
+                <ComboBox fx:id="cmbType" layoutX="100.0" layoutY="243.0" style="-fx-background-color: #ecf0f1; -fx-font-family: 'Arial';">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Medecin" />
@@ -34,9 +41,9 @@
                         </FXCollections>
                     </items>
                 </ComboBox>
-                <Label layoutX="13.0" layoutY="367.0" prefHeight="32.0" prefWidth="80.0" text="Statut" style="-fx-font-size: 20px; -fx-text-fill: #34495e;">
+                <Label layoutX="15.0" layoutY="269.0" prefHeight="32.0" prefWidth="60.0" style="-fx-font-size: 20px; -fx-text-fill: #34495e;" text="Statut">
                 </Label>
-                <ComboBox fx:id="cmbStatut" layoutX="98.0" layoutY="371.0" style="-fx-background-color: #ecf0f1; -fx-font-family: 'Arial';">
+                <ComboBox fx:id="cmbStatut" layoutX="99.0" layoutY="273.0" prefHeight="23.0" prefWidth="110.0" style="-fx-background-color: #ecf0f1; -fx-font-family: 'Arial';">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
                             <String fx:value="Active" />
@@ -46,35 +53,31 @@
                 </ComboBox>
             </children>
         </Pane>
-        <Pane layoutX="305.0" layoutY="84.0" prefHeight="405.0" prefWidth="482.0" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-color: #d6e6f2; -fx-border-width: 1; -fx-border-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.16), 10, 0, 0, 10);">
+        <Pane layoutX="305.0" layoutY="84.0" prefHeight="416.0" prefWidth="482.0" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-color: #d6e6f2; -fx-border-width: 1; -fx-border-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.16), 10, 0, 0, 10);">
             <children>
-                <TableView fx:id="table" layoutX="4.0" layoutY="14.0" prefHeight="314.0" prefWidth="469.0" style="-fx-font-family: 'Arial';">
+                <TableView fx:id="table" layoutX="4.0" layoutY="14.0" prefHeight="330.0" prefWidth="476.0" style="-fx-font-family: 'Arial';">
                     <columns>
                         <TableColumn fx:id="IDColmn" prefWidth="29.0" text="ID" />
                         <TableColumn fx:id="NomColmn" prefWidth="49.0" text="Nom" />
-                        <TableColumn fx:id="EmailColmn" prefWidth="113.0" text="Email" />
-                        <TableColumn fx:id="TelephoneColmn" prefWidth="109.0" text="Telephone" />
-                        <TableColumn fx:id="StatutColmn" prefWidth="52.0" text="Statut" />
-                        <TableColumn fx:id="SpecialiteColmn" prefWidth="74.0" text="Specialite" />
-                        <TableColumn fx:id="SpecialiteColmn1" prefWidth="74.0" text="Type" />
+                        <TableColumn fx:id="EmailColmn" prefWidth="93.0" text="Email" />
+                        <TableColumn fx:id="TelephoneColmn" prefWidth="90.0" text="Telephone" />
+                        <TableColumn fx:id="StatutColmn" prefWidth="60.0" text="Statut" />
+                        <TableColumn fx:id="SpecialiteColmn" prefWidth="73.0" text="Specialite" />
+                        <TableColumn fx:id="SpecialiteColmn1" text="Type" />
                     </columns>
                 </TableView>
-                <ButtonBar layoutX="16.0" layoutY="337.0" prefHeight="40.0" prefWidth="451.0">
+                <ButtonBar layoutX="16.0" layoutY="365.0" prefHeight="40.0" prefWidth="451.0">
                     <buttons>
-                        <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#Add" prefHeight="40.0" prefWidth="138.0" text="Add" style="-fx-background-color: linear-gradient(to bottom, #2ecc71, #27ae60); -fx-text-fill: white; -fx-font-size: 19px; -fx-background-radius: 5; -fx-font-family: 'Arial';">
+                        <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#Add" prefHeight="40.0" prefWidth="138.0" style="-fx-background-color: linear-gradient(to bottom, #2ecc71, #27ae60); -fx-text-fill: white; -fx-font-size: 19px; -fx-background-radius: 5; -fx-font-family: 'Arial';" text="Add">
                         </Button>
-                        <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#Update" prefHeight="40.0" prefWidth="149.0" text="Update" style="-fx-background-color: linear-gradient(to bottom, #f39c12, #d35400); -fx-text-fill: white; -fx-font-size: 19px; -fx-background-radius: 5; -fx-font-family: 'Arial';">
+                        <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#Update" prefHeight="40.0" prefWidth="149.0" style="-fx-background-color: linear-gradient(to bottom, #f39c12, #d35400); -fx-text-fill: white; -fx-font-size: 19px; -fx-background-radius: 5; -fx-font-family: 'Arial';" text="Update">
                         </Button>
-                        <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#Delete" prefHeight="40.0" prefWidth="149.0" text="Delete" style="-fx-background-color: linear-gradient(to bottom, #e74c3c, #c0392b); -fx-text-fill: white; -fx-font-size: 19px; -fx-background-radius: 5; -fx-font-family: 'Arial';">
+                        <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#Delete" prefHeight="40.0" prefWidth="149.0" style="-fx-background-color: linear-gradient(to bottom, #e74c3c, #c0392b); -fx-text-fill: white; -fx-font-size: 19px; -fx-background-radius: 5; -fx-font-family: 'Arial';" text="Delete">
                         </Button>
-                    </buttons>
-                </ButtonBar>
-                <ButtonBar layoutX="14.0" layoutY="420.0" prefWidth="470.0">
-                    <buttons>
-                        <Button fx:id="logoutButton" text="Déconnexion" onAction="#handleLogout"/>
                     </buttons>
                 </ButtonBar>
             </children>
         </Pane>
+            <Button fx:id="logoutButton" layoutX="27.0" layoutY="464.0" onAction="#handleLogout" text="Déconnexion" />
     </children>
 </AnchorPane>
