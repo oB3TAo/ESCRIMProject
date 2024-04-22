@@ -41,6 +41,11 @@
                         <Button fx:id="btnDelete" text="Delete" onAction="#Delete" prefWidth="100.0" style="-fx-background-color: linear-gradient(to bottom, #e74c3c, #c0392b); -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 5; -fx-font-family: 'Arial';"/>
                     </buttons>
                 </ButtonBar>
+                <ButtonBar layoutX="14.0" layoutY="280.0" prefWidth="832.0">
+                    <buttons>
+                        <Button fx:id="logoutButton" text="Déconnexion" onAction="#handleLogout"/>
+                    </buttons>
+                </ButtonBar>
             </children>
         </Pane>
     </children>
