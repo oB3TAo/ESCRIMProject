@@ -4,8 +4,19 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="696.0"
-            prefWidth="1034.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.escrimproject.UserController">
-    <fx:include fx:id="personnelTabContent" source="tab/user_tab.fxml"/>
-</AnchorPane>
+<?import java.lang.String?>
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="696.0"
+         prefWidth="1034.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: #7367F0;">
+    <tabs>
+        <Tab text="Personnel" closable="false">
+            <content>
+                <fx:include fx:id="personnelTabContent" source="tab/personnel_tab.fxml"/>
+            </content>
+        </Tab>
+        <Tab text="User" closable="false">
+            <content>
+                <fx:include fx:id="userTabContent" source="tab/user_tab.fxml"/>
+            </content>
+        </Tab>
+    </tabs>
+</TabPane>
