@@ -48,7 +48,9 @@ public class LoginController {
                 loadMedecinTab();
             } else if ("Logisticien".equals(role)) {
                 loadLogisticienTab();
-            } else if ("Admin".equals(role)) {
+            } else if ("Pharmacien".equals(role)){
+                loadPharmacienTab();
+            }else if ("Admin".equals(role)) {
                 loadAdminTab();
             } else {
                 // Display an error message if the role is not recognized
@@ -85,9 +87,6 @@ public class LoginController {
             Parent root = loader.load();
             Stage stage = (Stage) usernameField.getScene().getWindow();
             stage.setScene(new Scene(root, 900, 600));
-            // Pass any necessary data to the controller of the medecin tab if needed
-            // MedecinTabController controller = loader.getController();
-            // controller.initData(...);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -99,9 +98,17 @@ public class LoginController {
             Parent root = loader.load();
             Stage stage = (Stage) usernameField.getScene().getWindow();
             stage.setScene(new Scene(root, 688, 470));
-            // Pass any necessary data to the controller of the logisticien tab if needed
-            // LogisticienTabController controller = loader.getController();
-            // controller.initData(...);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadPharmacienTab() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("pharmacien_view.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) usernameField.getScene().getWindow();
+            stage.setScene(new Scene(root, 688, 470));
         } catch (IOException e) {
             e.printStackTrace();
         }
