@@ -119,6 +119,7 @@ public class CategoryController {
         }
     }
 
+
     @FXML
     private void Update(ActionEvent event) {
         if (tableCategories.getSelectionModel().getSelectedItem() != null) {

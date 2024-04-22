@@ -118,7 +118,13 @@ public class ProduitController implements Initializable {
         String quantite = txtQuantite.getText();
         String dateDePeremption = (dateDDP.getValue() != null) ? dateDDP.getValue().toString() : null;
         String type = cmbType.getValue();
-        String categorySelection = cmbCategory.getValue();
+        String categorySelection = null;
+        if (cmbCategory.getValue() != null) {
+            String[] parts = cmbCategory.getValue().split(" - ");
+            if (parts.length > 0) {
+                categorySelection = parts[0]; // Keep only the ID part
+            }
+        }
         if (nom.isEmpty() || poids.isEmpty() || quantite.isEmpty() || categorySelection.equals("Add New Category...")) {
             showAlert("Please fill in all required fields and select a valid category.");
             return;
@@ -175,21 +181,30 @@ public class ProduitController implements Initializable {
             showAlert("No product selected for update.");
             return;
         }
+
         String nom = txtNom.getText();
         String poids = txtPoids.getText();
         String quantite = txtQuantite.getText();
         String type = cmbType.getValue();
         String dateDePeremption = (dateDDP.getValue() != null) ? dateDDP.getValue().toString() : null;
+        String categorySelection = null;
+        if (cmbCategory.getValue() != null) {
+            String[] parts = cmbCategory.getValue().split(" - ");
+            if (parts.length > 0) {
+                categorySelection = parts[0]; // Keep only the ID part
+            }
+        }
 
         try {
-            String sql = "UPDATE Produit SET Nom = ?, Poids = ?, Quantite = ?, Type_Prod = ?, DateDePeremption = ? WHERE ID_Produit = ?";
+            String sql = "UPDATE Produit SET Nom = ?, Poids = ?, Quantite = ?, Type_Prod = ?, DateDePeremption = ?, ID_Category = ? WHERE ID_Produit = ?";
             pst = con.prepareStatement(sql);
             pst.setString(1, nom);
             pst.setFloat(2, Float.parseFloat(poids));
             pst.setInt(3, Integer.parseInt(quantite));
             pst.setString(4, type);
             pst.setString(5, dateDePeremption);
-            pst.setInt(6, selectedProduit.getId());
+            pst.setInt(6, Integer.parseInt(categorySelection)); // Set the category ID
+            pst.setInt(7, selectedProduit.getId());
             pst.executeUpdate();
             showAlert("Product updated successfully!");
             table();
@@ -199,18 +214,24 @@ public class ProduitController implements Initializable {
         }
     }
 
+
     private void initializeComboBox() {
         cmbType.setItems(FXCollections.observableArrayList("Medicament", "Materiel"));
-        cmbCategory.setItems(FXCollections.observableArrayList("Add New Category..."));
         loadCategories();
     }
 
-    private void loadCategories() {
+    public void loadCategories() {
         try {
             if (con == null) {
                 showAlert("Database connection is null.");
                 return;
             } else {
+                // Clear all existing items before loading new categories
+                cmbCategory.getItems().clear();
+
+                // Add the "Add New Category..." option
+                cmbCategory.getItems().add("Add New Category...");
+
                 String sql = "SELECT ID_Category, Name FROM category";
                 pst = con.prepareStatement(sql);
                 ResultSet rs = pst.executeQuery();
@@ -222,8 +243,10 @@ public class ProduitController implements Initializable {
             Logger.getLogger(ProduitController.class.getName()).log(Level.SEVERE, null, ex);
             showAlert("Error loading category: " + ex.getMessage());
         }
-
     }
+
+
+
 
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
