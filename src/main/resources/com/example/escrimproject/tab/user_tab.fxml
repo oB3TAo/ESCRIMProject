@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="431.0" prefWidth="664.0" style="-fx-background-color: linear-gradient(to bottom, #e0eafc, #cfdef3);" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escrimproject.UserController">
+    <children>
+        <Label layoutX="14.0" layoutY="-10.0" prefHeight="132.0" prefWidth="434.0" style="-fx-font-size: 40px; -fx-text-fill: #2c3e50; -fx-font-family: 'Arial'; -fx-font-weight: bold;" text="USER Management">
+        </Label>
+        <Pane layoutX="27.0" layoutY="143.0" prefHeight="146.0" prefWidth="262.0" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-color: #d6e6f2; -fx-border-width: 1; -fx-border-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.16), 10, 0, 0, 10);">
+            <children>
+                <Label layoutX="10.0" layoutY="14.0" prefHeight="30.0" prefWidth="96.0" style="-fx-font-size: 20px; -fx-text-fill: #34495e;" text="Username">
+                </Label>
+                <Label layoutX="14.0" layoutY="39.0" prefHeight="32.0" prefWidth="88.0" style="-fx-font-size: 20px; -fx-text-fill: #34495e;" text="Password">
+                </Label>
+                <Label layoutX="18.0" layoutY="71.0" prefHeight="32.0" prefWidth="48.0" style="-fx-font-size: 20px; -fx-text-fill: #34495e;" text="Role">
+                </Label>
+                <TextField fx:id="txtUsername" layoutX="103.0" layoutY="18.0" style="-fx-font-family: 'Arial';" />
+                <TextField fx:id="txtPassword" layoutX="103.0" layoutY="44.0" style="-fx-font-family: 'Arial';" />
+                <TextField fx:id="txtRole" layoutX="103.0" layoutY="76.0" style="-fx-font-family: 'Arial';" />
+                <Label layoutX="18.0" layoutY="103.0" prefHeight="32.0" prefWidth="137.0" style="-fx-font-size: 20px; -fx-text-fill: #34495e;" text="IdPersonnel">
+                </Label>
+                <ComboBox fx:id="cmbIdPers" layoutX="130.0" layoutY="108.0" prefHeight="23.0" prefWidth="96.0" style="-fx-background-color: #ecf0f1; -fx-font-family: 'Arial';" />
+            </children>
+        </Pane>
+        <Pane layoutX="305.0" layoutY="84.0" prefHeight="337.0" prefWidth="352.0" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-color: #d6e6f2; -fx-border-width: 1; -fx-border-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.16), 10, 0, 0, 10);">
+            <children>
+                <TableView fx:id="table" layoutX="4.0" layoutY="14.0" prefHeight="314.0" prefWidth="340.0" style="-fx-font-family: 'Arial';">
+                    <columns>
+                        <TableColumn fx:id="UsernameColmn" prefWidth="99.0" text="Username" />
+                        <TableColumn fx:id="PasswordColmn" minWidth="1.0" prefWidth="103.0" text="Password" />
+                        <TableColumn fx:id="TypeColmn" prefWidth="57.0" text="Type" />
+                        <TableColumn fx:id="IdPersColmn" text="IdPersonnel" />
+                    </columns>
+                </TableView>
+            </children>
+        </Pane>
+          <ButtonBar layoutX="-16.0" layoutY="306.0" prefHeight="111.0" prefWidth="313.0">
+              <buttons>
+                  <Button fx:id="btnUpdate" mnemonicParsing="false" onAction="#Update" prefHeight="40.0" prefWidth="149.0" style="-fx-background-color: linear-gradient(to bottom, #f39c12, #d35400); -fx-text-fill: white; -fx-font-size: 19px; -fx-background-radius: 5; -fx-font-family: 'Arial';" text="Update">
+                        </Button>
+                  <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#Delete" prefHeight="40.0" prefWidth="149.0" style="-fx-background-color: linear-gradient(to bottom, #e74c3c, #c0392b); -fx-text-fill: white; -fx-font-size: 19px; -fx-background-radius: 5; -fx-font-family: 'Arial';" text="Delete">
+                        </Button>
+                  <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#Add" prefHeight="40.0" prefWidth="138.0" style="-fx-background-color: linear-gradient(to bottom, #2ecc71, #27ae60); -fx-text-fill: white; -fx-font-size: 19px; -fx-background-radius: 5; -fx-font-family: 'Arial';" text="Add">
+                        </Button>
+              </buttons>
+          </ButtonBar>
+    </children>
+</AnchorPane>

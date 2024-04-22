@@ -1,37 +1,93 @@
 package com.example.escrimproject.architecture;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
+public abstract class Personnel {
+    private final IntegerProperty id;
+    private final StringProperty nom;
+    private final StringProperty email;
+    private final StringProperty telephone;
+    private final StringProperty statut;
+    private final StringProperty type;
 
-public class Personnel
-{
-    private final StringProperty id;
-    private final StringProperty name;
-    private final StringProperty role;
-    private final StringProperty items;
-
-    public Personnel()
-    {
-        id = new SimpleStringProperty(this, "id");
-        name = new SimpleStringProperty(this, "name");
-        role = new SimpleStringProperty(this, "role");
-        items = new SimpleStringProperty(this, "items");
+    public Personnel() {
+        id = new SimpleIntegerProperty();
+        nom = new SimpleStringProperty();
+        email = new SimpleStringProperty();
+        telephone = new SimpleStringProperty();
+        statut = new SimpleStringProperty();
+        type = new SimpleStringProperty();
     }
 
-    public StringProperty idProperty() { return id; }
-    public String getId() { return id.get(); }
-    public void setId(String newId) { id.set(newId); }
+    public IntegerProperty idProperty() {
+        return id;
+    }
 
-    public StringProperty nameProperty() { return name; }
-    public String getName() { return name.get(); }
-    public void setName(String newName) { name.set(newName); }
+    public int getId() {
+        return id.get();
+    }
 
-    public StringProperty roleProperty() { return role; }
-    public String getRole() { return role.get(); }
-    public void setRole(String newRole) { role.set(newRole); }
+    public void setId(int newId) {
+        id.set(newId);
+    }
 
-    public StringProperty itemsProperty() { return items; }
-    public String getItems() { return items.get(); }
-    public void setItems(String newItems) { items.set(newItems); }
+    public StringProperty nomProperty() {
+        return nom;
+    }
+
+    public String getNom() {
+        return nom.get();
+    }
+
+    public void setNom(String newNom) {
+        nom.set(newNom);
+    }
+
+    public StringProperty emailProperty() {
+        return email;
+    }
+
+    public String getEmail() {
+        return email.get();
+    }
+
+    public void setEmail(String newEmail) {
+        email.set(newEmail);
+    }
+
+    public StringProperty telephoneProperty() {
+        return telephone;
+    }
+
+    public String getTelephone() {
+        return telephone.get();
+    }
+
+    public void setTelephone(String newTelephone) {
+        telephone.set(newTelephone);
+    }
+
+    public StringProperty statutProperty() {
+        return statut;
+    }
+
+    public String getStatut() {
+        return statut.get();
+    }
+
+    public void setStatut(String newStatut) {
+        statut.set(newStatut);
+    }
+
+    public String getType() {
+        return type.get();
+    }
+
+    public StringProperty typeProperty() {
+        return type;
+    }
+    public void setType(String newType) {
+        type.set(newType);
+    }
+
 }

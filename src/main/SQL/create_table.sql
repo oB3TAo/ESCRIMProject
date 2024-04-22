@@ -9,171 +9,96 @@ USE escrim;
 
 -- Create tables in the ESCRIM schema
 
-CREATE TABLE Fournisseur
-(
-    ID_Fournisseur    INT AUTO_INCREMENT PRIMARY KEY,
-    Nom               VARCHAR(255),
-    Adresse           VARCHAR(255),
-    Telephone         VARCHAR(20),
-    Email             VARCHAR(255),
-    Contact_Principal VARCHAR(255)
+CREATE TABLE Category (
+                           ID_Category  INT(10) NOT NULL AUTO_INCREMENT,
+                           Name VARCHAR(255),
+                           Description   VARCHAR(255),
+                           PRIMARY KEY (ID_Category)
 );
 
-CREATE TABLE users
-(
-    id       INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL,
-    password VARCHAR(50) NOT NULL
+CREATE TABLE Commande (
+                          ID_Commande           INT(11) NOT NULL AUTO_INCREMENT,
+                          Date_Commande         DATE,
+                          Date_Livraison_Prevue DATE,
+                          Statut_Commande       VARCHAR(50),
+                          Montant_Total         NUMERIC(10, 2),
+                          ID_Fournisseur        INT(10) NOT NULL,
+                          ID_Personnel          INT(10) NOT NULL,
+                          ID_Produit            INT(11) NOT NULL,
+                          PRIMARY KEY (ID_Commande)
 );
 
-CREATE TABLE personnel
-(
-    id    INT AUTO_INCREMENT PRIMARY KEY,
-    name  VARCHAR(50) NOT NULL,
-    role  VARCHAR(50) NOT NULL,
-    items VARCHAR(50) NOT NULL
+CREATE TABLE Fournisseur (
+                             ID_Fournisseur    INT(10) NOT NULL AUTO_INCREMENT,
+                             Nom               VARCHAR(255),
+                             Adresse           VARCHAR(255),
+                             Telephone         VARCHAR(20),
+                             Email             VARCHAR(255),
+                             Contact_Principal VARCHAR(255),
+                             PRIMARY KEY (ID_Fournisseur)
 );
 
-CREATE TABLE Avion
-(
-    ID_Avion                  INT AUTO_INCREMENT PRIMARY KEY,
-    Modele                    VARCHAR(255),
-    Capacite                  INT,
-    Immatriculation           VARCHAR(100),
-    Statut                    VARCHAR(50),
-    Date_Derniere_Maintenance DATE
+CREATE TABLE Patient (
+                         ID_Patient             INT(11) NOT NULL AUTO_INCREMENT,
+                         Nom                    VARCHAR(255),
+                         Date_de_Naissance      DATE,
+                         Sexe                   CHAR(1),
+                         Numero_Securite_Social VARCHAR(15),
+                         Adresse                VARCHAR(255),
+                         Numero_Telephone       VARCHAR(20),
+                         Email                  VARCHAR(255),
+                         Traitement_en_Cours    TEXT,
+                         Diagnostic             VARCHAR(255),
+                         Statut                 VARCHAR(255),
+                         ID_Personnel           INT(10) NOT NULL,
+                         PRIMARY KEY (ID_Patient)
 );
 
-CREATE TABLE Categorie
-(
-    ID_Categorie  INT AUTO_INCREMENT PRIMARY KEY,
-    Nom_Categorie VARCHAR(255),
-    Description   VARCHAR(255)
+CREATE TABLE Personnel (
+                           ID_Personnel INT(10) NOT NULL AUTO_INCREMENT,
+                           Nom          VARCHAR(255),
+                           Email        VARCHAR(255),
+                           Telephone    VARCHAR(20),
+                           Statut       VARCHAR(255),
+                           Specialite   VARCHAR(255),  -- Used for specialization
+                           Type         VARCHAR(255),  -- New column to identify personnel type
+                           PRIMARY KEY (ID_Personnel)
 );
 
-CREATE TABLE Emplacement
-(
-    ID_Emplacement  INT AUTO_INCREMENT PRIMARY KEY,
-    Nom_Emplacement VARCHAR(255),
-    Capacite        INT
+CREATE TABLE Produit (
+                         Nom              VARCHAR(255),
+                         ID_Category     INT(10) NOT NULL,
+                         Poids            FLOAT,
+                         Quantite         INT(11),
+                         DateDePeremption DATE,
+                         Type_Prod        VARCHAR(255),  -- New column to identify personnel type
+                         ID_Produit       INT(11) NOT NULL AUTO_INCREMENT,
+                         PRIMARY KEY (ID_Produit)
 );
 
-CREATE TABLE Colis
-(
-    ID_Colis       INT AUTO_INCREMENT PRIMARY KEY,
-    Nom            VARCHAR(255),
-    Poids          DECIMAL(10, 2),
-    Volume         DECIMAL(10, 2),
-    Date_Envoi     DATE,
-    Statut         VARCHAR(60),
-    ID_Emplacement INT NOT NULL,
-    FOREIGN KEY (ID_Emplacement) REFERENCES Emplacement(ID_Emplacement)
+CREATE TABLE User (
+                      Username     VARCHAR(255) NOT NULL,
+                      Password     VARCHAR(255),
+                      Role         VARCHAR(255),
+                      ID_Personnel INT(10) NOT NULL,
+                      PRIMARY KEY (Username)
 );
 
-CREATE TABLE Materiel
-(
-    ID_Materiel           INT AUTO_INCREMENT PRIMARY KEY,
-    Nom                   VARCHAR(255),
-    Categorie             INT NOT NULL,
-    Quantite_Disponible   INT,
-    Date_Achat            DATE,
-    Derniere_Verification DATE,
-    Date_Peremption       DATE,
-    Fournisseur           INT NOT NULL,
-    Cout                  NUMERIC(10, 2),
-    ID_Colis              INT NOT NULL,
-    FOREIGN KEY (ID_Colis) REFERENCES Colis(ID_Colis),
-    FOREIGN KEY (Fournisseur) REFERENCES Fournisseur(ID_Fournisseur)
-);
+ALTER TABLE Commande
+    ADD CONSTRAINT FK_Commande_Fournisseur FOREIGN KEY (ID_Fournisseur) REFERENCES Fournisseur (ID_Fournisseur);
 
-CREATE TABLE PersonnelLogistique
-(
-    ID_Personnel INT AUTO_INCREMENT PRIMARY KEY,
-    Nom          VARCHAR(255),
-    Fonction     VARCHAR(100),
-    Specialite   VARCHAR(255),
-    Contacts     VARCHAR(255),
-    Identifiant  VARCHAR(255),
-    Mot_de_passe VARCHAR(255)
-);
+ALTER TABLE User
+    ADD CONSTRAINT FK_User_Personnel FOREIGN KEY (ID_Personnel) REFERENCES Personnel (ID_Personnel);
 
-CREATE TABLE Maintenance
-(
-    ID_Maintenance             INT AUTO_INCREMENT PRIMARY KEY,
-    ID_Materiel                INT NOT NULL,
-    Date_Maintenance           DATE,
-    Type_Maintenance           VARCHAR(100),
-    Description                VARCHAR(255),
-    Statut                     VARCHAR(50),
-    Date_Prochaine_Maintenance DATE,
-    ID_Personnel               INT NOT NULL,
-    FOREIGN KEY (ID_Materiel) REFERENCES Materiel(ID_Materiel),
-    FOREIGN KEY (ID_Personnel) REFERENCES PersonnelLogistique(ID_Personnel)
-);
+ALTER TABLE Commande
+    ADD CONSTRAINT FK_Commande_Personnel FOREIGN KEY (ID_Personnel) REFERENCES Personnel (ID_Personnel);
 
-CREATE TABLE Medicament
-(
-    ID_Medicament   INT AUTO_INCREMENT PRIMARY KEY,
-    Nom_Commercial  VARCHAR(255),
-    Nom_Generique   VARCHAR(255),
-    Dose            VARCHAR(100),
-    Forme           VARCHAR(100),
-    Quantite_Stock  INT,
-    Date_Peremption DATE,
-    Prix_Unitaire   DECIMAL(10, 2)
-);
+ALTER TABLE Commande
+    ADD CONSTRAINT FK_Commande_Produit FOREIGN KEY (ID_Produit) REFERENCES Produit (ID_Produit);
 
-CREATE TABLE Patient
-(
-    ID_Patient             INT AUTO_INCREMENT PRIMARY KEY,
-    Nom                    VARCHAR(255),
-    Date_de_Naissance      DATE,
-    Sexe                   CHAR(1),
-    Numero_Securite_Social VARCHAR(15),
-    Adresse                VARCHAR(255),
-    Numero_Telephone       VARCHAR(20),
-    Email                  VARCHAR(255),
-    Traitement_en_Cours    TEXT
-);
+ALTER TABLE Produit
+    ADD CONSTRAINT FK_Produit_Categorie FOREIGN KEY (ID_Category) REFERENCES category (ID_Category);
 
-CREATE TABLE PersonnelMedical
-(
-    ID_PersonnelMedical INT AUTO_INCREMENT PRIMARY KEY,
-    Nom                 VARCHAR(255),
-    Fonction            VARCHAR(100),
-    Specialite          VARCHAR(255),
-    Telephone           VARCHAR(20),
-    Email               VARCHAR(255),
-    ID_Patient          INT NOT NULL,
-    FOREIGN KEY (ID_Patient) REFERENCES Patient(ID_Patient)
-);
+ALTER TABLE Patient
+    ADD CONSTRAINT FK_Patient_Personnel FOREIGN KEY (ID_Personnel) REFERENCES Personnel (ID_Personnel);
 
-CREATE TABLE Utilisation
-(
-    ID_Utilisation    INT AUTO_INCREMENT PRIMARY KEY,
-    ID_Materiel       INT NOT NULL,
-    Date_Debut        DATE,
-    Date_Fin          DATE,
-    Destination       VARCHAR(255),
-    Quantite_Utilisee INT,
-    ID_Personnel      INT NOT NULL,
-    FOREIGN KEY (ID_Materiel) REFERENCES Materiel(ID_Materiel),
-    FOREIGN KEY (ID_Personnel) REFERENCES PersonnelMedical(ID_PersonnelMedical)
-);
-
-CREATE TABLE Commande
-(
-    ID_Commande           INT AUTO_INCREMENT PRIMARY KEY,
-    Date_Commande         DATE,
-    Date_Livraison_Prevue DATE,
-    Statut_Commande       VARCHAR(50),
-    Montant_Total         DECIMAL(10, 2),
-    ID_Fournisseur        INT NOT NULL,
-    ID_Personnel          INT NOT NULL,
-    ID_Materiel           INT NOT NULL,
-    ID_Medicament         INT NOT NULL,
-    FOREIGN KEY (ID_Fournisseur) REFERENCES Fournisseur(ID_Fournisseur),
-    FOREIGN KEY (ID_Personnel) REFERENCES PersonnelLogistique(ID_Personnel),
-    FOREIGN KEY (ID_Materiel) REFERENCES Materiel(ID_Materiel),
-    FOREIGN KEY (ID_Medicament) REFERENCES Medicament(ID_Medicament)
-);
