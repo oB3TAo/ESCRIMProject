@@ -97,7 +97,7 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("logisticien_view.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setScene(new Scene(root, 900, 516));
+            stage.setScene(new Scene(root, 900, 530));
         } catch (IOException e) {
             e.printStackTrace();
         }
