@@ -31,6 +31,7 @@ public class PersonnelController implements Initializable {
     @FXML private TableColumn<Personnel, String> TelephoneColmn;
     @FXML private TableColumn<Personnel, String> StatutColmn;
     @FXML private TableColumn<Personnel, String> SpecialiteColmn;
+    @FXML private TableColumn<Personnel, String> TypeColmn;
     @FXML private ComboBox<String> cmbType;
     @FXML private ComboBox<String> cmbStatut;
     @FXML private Button btnAdd;
@@ -206,6 +207,7 @@ public class PersonnelController implements Initializable {
                 p.setEmail(rs.getString("Email"));
                 p.setTelephone(rs.getString("Telephone"));
                 p.setStatut(rs.getString("Statut"));
+                p.setType(rs.getString("Type"));
                 personnels.add(p);
             }
             table.setItems(personnels);
@@ -222,6 +224,7 @@ public class PersonnelController implements Initializable {
         EmailColmn.setCellValueFactory(f -> f.getValue().emailProperty());
         TelephoneColmn.setCellValueFactory(f -> f.getValue().telephoneProperty());
         StatutColmn.setCellValueFactory(f -> f.getValue().statutProperty());
+        TypeColmn.setCellValueFactory(f -> f.getValue().typeProperty());
         SpecialiteColmn.setCellValueFactory(f -> {
             if (f.getValue() instanceof Medecin) {
                 return ((Medecin) f.getValue()).specialiteProperty();

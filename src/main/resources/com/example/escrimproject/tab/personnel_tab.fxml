@@ -63,7 +63,7 @@
                         <TableColumn fx:id="TelephoneColmn" prefWidth="90.0" text="Telephone" />
                         <TableColumn fx:id="StatutColmn" prefWidth="60.0" text="Statut" />
                         <TableColumn fx:id="SpecialiteColmn" prefWidth="73.0" text="Specialite" />
-                        <TableColumn fx:id="SpecialiteColmn1" text="Type" />
+                        <TableColumn fx:id="TypeColmn" text="Type" />
                     </columns>
                 </TableView>
                 <ButtonBar layoutX="16.0" layoutY="365.0" prefHeight="40.0" prefWidth="451.0">

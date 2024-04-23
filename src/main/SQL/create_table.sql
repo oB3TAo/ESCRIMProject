@@ -113,7 +113,9 @@ ALTER TABLE Patient
 INSERT INTO Category (Name, Description)
 VALUES ('Category1', 'Description1'),
        ('Category2', 'Description2'),
-       ('Category3', 'Description3');
+       ('Category3', 'Description3'),
+       ('Category4', 'Description4'),
+       ('Category5', 'Description5');
 
 -- Populate Fournisseur table
 INSERT INTO Fournisseur (Nom, Adresse, Telephone, Email, Contact_Principal)
@@ -129,9 +131,29 @@ VALUES ('Person1', 'person1@example.com', '1234567890', 'Statut1', 'Specialite1'
 
 -- Populate Produit table
 INSERT INTO Produit (Nom, ID_Category, Poids, Quantite, DateDePeremption, Type_Prod)
-VALUES ('Product1', 1, 100.50, 50, '2024-12-31', 'Type1'),
-       ('Product2', 2, 75.25, 30, '2024-11-30', 'Type2'),
-       ('Product3', 3, 120.75, 20, '2024-10-31', 'Type3');
+VALUES ('Paracetamol', 1, 0.5, 100, '2025-12-31', 'Medicament'),
+       ('Stethoscope', 4, 0.9, 20, NULL, 'Materiel'),
+       ('Amoxicillin', 1, 0.75, 50, '2025-11-30', 'Medicament'),
+       ('Surgical Kit', 5, 0.2, 10, NULL, 'Materiel'),
+       ('Omeprazole', 1, 1.0, 30, '2025-10-31', 'Medicament');
+
+-- Populate Patient table
+INSERT INTO Patient (Nom, Date_de_Naissance, Sexe, Numero_Securite_Social, Adresse, Numero_Telephone, Email,
+                     Traitement_en_Cours, Diagnostic, Statut, ID_Personnel)
+VALUES ('John Doe', '1980-05-15', 'M', '1234567890', '123 Main Street, City, Country', '1234567890',
+        'john.doe@example.com', 'Pain Management', 'Chronic Pain', 'Active', 3),
+       ('Jane Smith', '1990-10-25', 'F', '9876543210', '456 Elm Street, City, Country', '9876543210',
+        'jane.smith@example.com', 'Antibiotic Treatment', 'Bacterial Infection', 'Active', 3),
+       ('Michael Johnson', '1975-03-10', 'M', '4561237890', '789 Oak Street, City, Country', '4561237890',
+        'michael.johnson@example.com', 'GERD Management', 'Gastroesophageal Reflux Disease', 'Active', 3);
+
+-- Populate Commande table
+INSERT INTO Commande (Date_Commande, Date_Livraison_Prevue, Statut_Commande, Montant_Total, ID_Fournisseur,
+                      ID_Personnel, ID_Produit)
+VALUES ('2024-04-23', '2024-04-30', 'Pending', 500.00, 1, 2, 1),
+       ('2024-04-24', '2024-04-30', 'Pending', 150.00, 2, 2, 2),
+       ('2024-04-25', '2024-05-02', 'Pending', 200.00, 3, 2, 3);
+
 
 -- Populate User table
 INSERT INTO User (Username, Password, Role, ID_Personnel)
