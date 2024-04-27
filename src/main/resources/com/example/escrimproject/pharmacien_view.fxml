@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- Imports are necessary for using JavaFX classes in FXML -->
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<!-- Root layout component -->
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.escrimproject.ProduitController"
             prefHeight="550.0" prefWidth="700.0">
+    <!-- Include external FXML to modularize the UI -->
     <fx:include fx:id="produitTabContent" source="tab/produit_tab.fxml"/>
 </AnchorPane>
