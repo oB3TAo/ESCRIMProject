@@ -7,8 +7,7 @@ CREATE SCHEMA escrim;
 -- Use the ESCRIM schema
 USE escrim;
 
--- Create tables in the ESCRIM schema
-
+-- Create a table for storing different categories
 CREATE TABLE Category
 (
     ID_Category INT(10) NOT NULL AUTO_INCREMENT,
@@ -17,6 +16,7 @@ CREATE TABLE Category
     PRIMARY KEY (ID_Category)
 );
 
+-- Create a table for storing commands or orders
 CREATE TABLE Commande
 (
     ID_Commande           INT(11) NOT NULL AUTO_INCREMENT,
@@ -30,6 +30,7 @@ CREATE TABLE Commande
     PRIMARY KEY (ID_Commande)
 );
 
+-- Create a table for storing supplier information
 CREATE TABLE Fournisseur
 (
     ID_Fournisseur    INT(10) NOT NULL AUTO_INCREMENT,
@@ -41,6 +42,7 @@ CREATE TABLE Fournisseur
     PRIMARY KEY (ID_Fournisseur)
 );
 
+-- Create a table for storing patient information
 CREATE TABLE Patient
 (
     ID_Patient             INT(11) NOT NULL AUTO_INCREMENT,
@@ -58,6 +60,7 @@ CREATE TABLE Patient
     PRIMARY KEY (ID_Patient)
 );
 
+-- Create a table for hospital and logistical personnel
 CREATE TABLE Personnel
 (
     ID_Personnel INT(10) NOT NULL AUTO_INCREMENT,
@@ -70,6 +73,7 @@ CREATE TABLE Personnel
     PRIMARY KEY (ID_Personnel)
 );
 
+-- Create a table for storing product information
 CREATE TABLE Produit
 (
     Nom              VARCHAR(255),
@@ -82,6 +86,7 @@ CREATE TABLE Produit
     PRIMARY KEY (ID_Produit)
 );
 
+-- Create a table for user management
 CREATE TABLE User
 (
     Username     VARCHAR(255) NOT NULL,
@@ -91,6 +96,7 @@ CREATE TABLE User
     PRIMARY KEY (Username)
 );
 
+-- Define foreign key constraints with explicit names
 ALTER TABLE Commande
     ADD CONSTRAINT FK_Commande_Fournisseur FOREIGN KEY (ID_Fournisseur) REFERENCES Fournisseur (ID_Fournisseur);
 
