@@ -12,6 +12,6 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.escrimproject.ProduitController"
             prefHeight="550.0" prefWidth="700.0">
-    <!-- Include external FXML to modularize the UI -->
+    <!-- Include external FXML to modularize the User Interface -->
     <fx:include fx:id="produitTabContent" source="tab/produit_tab.fxml"/>
 </AnchorPane>
