@@ -11,9 +11,10 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
+<!-- Main container for the login UI -->
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escrimproject.LoginController" style="-fx-background-color: #7367F0;">
     <children>
-        <!-- Left Pane for Welcome Message -->
+        <!-- Stylish left pane with gradient background and geometric shapes -->
         <AnchorPane style="-fx-background-color: linear-gradient(to bottom right, #8E2DE2, #4A00E0);" prefWidth="450.0" AnchorPane.leftAnchor="0.0">
             <children>
                 <Rectangle width="200.0" height="200.0" fill="#C492FC" rotate="45" layoutX="100" layoutY="120" arcHeight="50" arcWidth="50"/>
@@ -30,7 +31,7 @@
             </children>
         </AnchorPane>
 
-        <!-- Right Pane for User Login -->
+        <!-- Right pane for login inputs and submit button -->
         <VBox layoutX="450" layoutY="63" prefWidth="450" spacing="10" alignment="TOP_CENTER" style="-fx-background-color: white; -fx-padding: 60;">
             <children>
                 <Label text="CONNEXION" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
