@@ -2,7 +2,14 @@ package com.example.escrimproject.architecture;
 
 import javafx.beans.property.*;
 
+/**
+ * Abstract class representing a general personnel entity in the system.
+ * This class is designed to be extended by specific types of personnel, such as Medecin or Logisticien.
+ * It includes common attributes like id, name, email, telephone, status, and type,
+ * which are fundamental to all personnel types.
+ */
 public abstract class Personnel {
+    // Properties for the common attributes of personnel
     private final IntegerProperty id;
     private final StringProperty nom;
     private final StringProperty email;
@@ -10,6 +17,9 @@ public abstract class Personnel {
     private final StringProperty statut;
     private final StringProperty type;
 
+    /**
+     * Constructor initializes all JavaFX properties.
+     */
     public Personnel() {
         id = new SimpleIntegerProperty();
         nom = new SimpleStringProperty();
@@ -18,6 +28,8 @@ public abstract class Personnel {
         statut = new SimpleStringProperty();
         type = new SimpleStringProperty();
     }
+
+    // Property accessors and getters/setters for each attribute
 
     public IntegerProperty idProperty() {
         return id;
