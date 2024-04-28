@@ -11,14 +11,19 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
+<!-- Main container for the Patient Management interface -->
 <AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: linear-gradient(to bottom, #e0eafc, #cfdef3);" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escrimproject.PatientController">
     <children>
+        <!-- Title Label for Patient Management -->
         <Label layoutX="20.0" layoutY="10.0" style="-fx-font-size: 24px; -fx-text-fill: #2c3e50; -fx-font-family: 'Arial';" text="Patient Management">
         </Label>
+
+        <!-- Pane for Displaying Patients' Table -->
         <Pane layoutX="20.0" layoutY="50.0" prefHeight="200.0" prefWidth="860.0" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-color: #d6e6f2; -fx-border-width: 1; -fx-border-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.16), 10, 0, 0, 10);">
             <children>
                 <TableView fx:id="table" layoutX="14.0" layoutY="14.0" prefHeight="172.0" prefWidth="832.0" style="-fx-font-family: 'Arial';">
                     <columns>
+                        <!-- Columns setup with IDs and text titles -->
                         <TableColumn fx:id="IDColmn" prefWidth="47.0" text="ID" />
                         <TableColumn fx:id="NomColmn" prefWidth="73.0" text="Nom" />
                         <TableColumn fx:id="DateNaissanceColmn" prefWidth="124.0" text="Date de Naissance" />
@@ -35,8 +40,12 @@
                 </TableView>
             </children>
         </Pane>
+
+        <!-- Input Pane for Patient Details -->
         <Pane layoutX="20.0" layoutY="260.0" prefHeight="344.0" prefWidth="860.0" style="-fx-background-color: #ffffff; -fx-background-radius: 8; -fx-border-color: #d6e6f2; -fx-border-width: 1; -fx-border-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.16), 10, 0, 0, 10);">
             <children>
+                <!-- Input fields and labels -->
+                <!-- Setup various input fields for patient details such as Name, Date of Birth, SSN, etc. -->
                 <Label layoutX="14.0" layoutY="14.0" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';" text="Nom:" />
                 <TextField fx:id="txtNom" layoutX="120.0" layoutY="10.0" prefWidth="200.0" style="-fx-font-family: 'Arial';" />
                 <Label layoutX="350.0" layoutY="14.0" style="-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-family: 'Arial';" text="Date de Naissance:" />
