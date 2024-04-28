@@ -2,28 +2,40 @@
 
 <?import java.lang.*?>
 <?import java.util.*?>
+<!-- Import necessary JavaFX classes -->
 <?import javafx.scene.*?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<!-- Root TabPane element defining the main navigation structure of the application -->
 <TabPane xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml"
          prefHeight="600.0" prefWidth="900.0">
+
+    <!-- Tabs within the TabPane -->
     <tabs>
+        <!-- Tab for managing orders -->
         <Tab text="Commande" closable="false">
             <content>
+                <!-- Include external FXML for order management functionality -->
                 <fx:include fx:id="commandeTabContent" source="tab/commandes_tab.fxml"/>
             </content>
         </Tab>
+
+        <!-- Tab for managing suppliers -->
         <Tab text="Fournisseur" closable="false">
             <content>
+                <!-- Include external FXML for supplier management functionality -->
                 <fx:include fx:id="fournisseurTabContent" source="tab/fournisseur_tab.fxml"/>
             </content>
         </Tab>
+
+        <!-- Tab for managing products -->
         <Tab text="Produit" closable="false">
             <content>
+                <!-- Include external FXML for product management functionality -->
                 <fx:include fx:id="produitTabContent" source="tab/produit_tab.fxml"/>
             </content>
         </Tab>
