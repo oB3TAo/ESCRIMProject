@@ -4,7 +4,14 @@ import javafx.beans.property.*;
 
 import java.time.LocalDate;
 
+
+/**
+ * Represents a Patient in the healthcare system with detailed personal and medical information.
+ * This class leverages JavaFX properties to facilitate easy binding with UI components and ensure
+ * reactive updates in a JavaFX application.
+ */
 public class Patient {
+    // JavaFX properties for the patient's details
     private final IntegerProperty id;
     private final StringProperty nom;
     private final ObjectProperty<LocalDate> dateDeNaissance;
@@ -18,6 +25,9 @@ public class Patient {
     private final StringProperty statut;
     private final IntegerProperty idPersonnel;
 
+    /**
+     * Constructor that initializes all JavaFX properties to their default state.
+     */
     public Patient() {
         id = new SimpleIntegerProperty();
         nom = new SimpleStringProperty();
@@ -32,6 +42,8 @@ public class Patient {
         statut = new SimpleStringProperty();
         idPersonnel = new SimpleIntegerProperty();
     }
+
+    // Property accessors to facilitate data binding and manipulation in JavaFX UI components
 
     public IntegerProperty idProperty() {
         return id;
