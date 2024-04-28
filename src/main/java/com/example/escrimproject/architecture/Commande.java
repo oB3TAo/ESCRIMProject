@@ -1,10 +1,15 @@
 package com.example.escrimproject.architecture;
 
 import javafx.beans.property.*;
-
 import java.time.LocalDate;
 
+/**
+ * Represents a command or order within the system with properties that are bindable in a JavaFX UI.
+ * This class uses JavaFX properties to enable automatic updates between UI components and the model,
+ * facilitating an interactive and responsive user interface.
+ */
 public class Commande {
+    // JavaFX properties for the Commande class
     private final IntegerProperty idCommande;
     private final ObjectProperty<LocalDate> dateCommande;
     private final ObjectProperty<LocalDate> dateLivraisonPrevue;
@@ -14,6 +19,9 @@ public class Commande {
     private final IntegerProperty idPersonnel;
     private final IntegerProperty idProduit;
 
+    /**
+     * Constructor for Commande initializes all properties with default values.
+     */
     public Commande() {
         this.idCommande = new SimpleIntegerProperty();
         this.dateCommande = new SimpleObjectProperty<>();
@@ -25,7 +33,8 @@ public class Commande {
         this.idProduit = new SimpleIntegerProperty();
     }
 
-    // Property getters
+    // Property getters provide access to the property instances.
+
     public IntegerProperty idCommandeProperty() {
         return idCommande;
     }
@@ -58,7 +67,8 @@ public class Commande {
         return idProduit;
     }
 
-    // Getters and setters
+    // Standard getters and setters for each property.
+
     public int getIdCommande() {
         return idCommande.get();
     }
@@ -123,5 +133,3 @@ public class Commande {
         this.idProduit.set(id);
     }
 }
-
-//test
