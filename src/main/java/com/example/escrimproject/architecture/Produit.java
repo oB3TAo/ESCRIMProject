@@ -5,6 +5,11 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * Abstract base class representing a generic product within the system.
+ * This class provides common attributes and functionality for various types of products,
+ * facilitating property binding and management in a JavaFX application.
+ */
 public abstract class Produit {
     private final IntegerProperty id;
     private final StringProperty nom;
@@ -14,6 +19,9 @@ public abstract class Produit {
     private final StringProperty categoryId;
 
 
+    /**
+     * Constructor initializing properties with default values.
+     */
     public Produit() {
         this.id = new SimpleIntegerProperty();
         this.nom = new SimpleStringProperty();
@@ -22,6 +30,8 @@ public abstract class Produit {
         this.type = new SimpleStringProperty();
         this.categoryId = new SimpleStringProperty();
     }
+
+    // Accessor methods for properties
 
     public IntegerProperty idProperty() {
         return id;
