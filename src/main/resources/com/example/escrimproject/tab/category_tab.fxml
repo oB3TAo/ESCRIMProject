@@ -10,13 +10,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<!-- Main container for the Category Management interface -->
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="318.0" prefWidth="495.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escrimproject.CategoryController">
     <children>
+        <!-- Title for the Category Management section -->
         <Label layoutX="16.0" layoutY="14.0" text="Category Management">
             <font>
                 <Font size="24.0" />
             </font>
         </Label>
+
+        <!-- TableView for displaying categories -->
         <TableView fx:id="tableCategories" layoutX="179.0" layoutY="63.0" prefHeight="172.0" prefWidth="302.0">
             <columns>
                 <TableColumn fx:id="colCategoryId" prefWidth="50" text="ID" />
@@ -24,9 +28,13 @@
                 <TableColumn fx:id="colCategoryDescription" prefWidth="198.0" text="Description" />
             </columns>
         </TableView>
+
+        <!-- Labels and inputs for category details -->
         <Label layoutX="16.0" layoutY="63.0" text="Name of category" />
         <TextField fx:id="txtCategoryName" layoutX="16.0" layoutY="84.0" prefWidth="150" />
         <TextArea fx:id="txtCategoryDescription" layoutX="14.0" layoutY="134.0" prefHeight="101.0" prefWidth="150.0" />
+
+        <!-- ButtonBar for CRUD operations -->
         <ButtonBar layoutX="91.0" layoutY="235.0" prefHeight="80.0" prefWidth="313.0">
             <buttons>
                 <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#Add" prefHeight="40.0" prefWidth="138.0" style="-fx-background-color: linear-gradient(to bottom, #2ecc71, #27ae60); -fx-text-fill: white; -fx-font-size: 19px; -fx-background-radius: 5; -fx-font-family: 'Arial';" text="Add">
