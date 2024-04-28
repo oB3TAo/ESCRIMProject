@@ -2,7 +2,14 @@ package com.example.escrimproject.architecture;
 
 import javafx.beans.property.*;
 
+
+/**
+ * Represents a Supplier entity in the system with properties that are bindable in a JavaFX UI.
+ * This class is designed to interact closely with JavaFX components through property bindings,
+ * facilitating dynamic updates and interactions within the user interface.
+ */
 public class Fournisseur {
+    // Properties to hold supplier details
     private final IntegerProperty id;
     private final StringProperty nom;
     private final StringProperty adresse;
@@ -10,6 +17,9 @@ public class Fournisseur {
     private final StringProperty email;
     private final StringProperty contactPrincipal;
 
+    /**
+     * Default constructor initializing all properties.
+     */
     public Fournisseur() {
         this.id = new SimpleIntegerProperty();
         this.nom = new SimpleStringProperty();
@@ -18,6 +28,8 @@ public class Fournisseur {
         this.email = new SimpleStringProperty();
         this.contactPrincipal = new SimpleStringProperty();
     }
+
+    // Property accessors to facilitate data binding and manipulation in JavaFX UI components
 
     public IntegerProperty idProperty() {
         return id;
@@ -43,7 +55,8 @@ public class Fournisseur {
         return contactPrincipal;
     }
 
-    // Getters and setters can now return and accept simple types and also operate on properties
+    // Standard getters and setters for the properties
+
     public int getId() {
         return id.get();
     }
