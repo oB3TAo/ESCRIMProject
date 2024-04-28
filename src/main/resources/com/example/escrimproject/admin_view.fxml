@@ -5,16 +5,24 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <?import java.lang.String?>
+<!-- Main container for the application's tabbed interface -->
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0"
          prefWidth="802.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: #7367F0;">
+
+    <!-- Tabs section -->
     <tabs>
+        <!-- Personnel management tab -->
         <Tab text="Personnel" closable="false">
             <content>
+                <!-- Include external FXML for personnel management functionality -->
                 <fx:include fx:id="personnelTabContent" source="tab/personnel_tab.fxml"/>
             </content>
         </Tab>
+
+        <!-- User management tab -->
         <Tab text="User" closable="false">
             <content>
+                <!-- Include external FXML for user management functionality -->
                 <fx:include fx:id="userTabContent" source="tab/user_tab.fxml"/>
             </content>
         </Tab>
