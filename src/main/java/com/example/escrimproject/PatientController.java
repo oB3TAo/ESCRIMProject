@@ -21,61 +21,104 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Controller class for managing patient data in the application.
+ */
 public class PatientController implements Initializable {
 
-    @FXML private TableView<Patient> table;
-    @FXML private TableColumn<Patient, Integer> IDColmn;
-    @FXML private TableColumn<Patient, String> NomColmn;
-    @FXML private TableColumn<Patient, LocalDate> DateNaissanceColmn;
-    @FXML private TableColumn<Patient, String> SexeColmn;
-    @FXML private TableColumn<Patient, String> SSNColmn;
-    @FXML private TableColumn<Patient, String> AdresseColmn;
-    @FXML private TableColumn<Patient, String> TelephoneColmn;
-    @FXML private TableColumn<Patient, String> EmailColmn;
-    @FXML private TableColumn<Patient, String> TraitementColmn;
-    @FXML private TableColumn<Patient, String> DiagnosticColmn;
-    @FXML private TableColumn<Patient, String> StatutColmn;
-    @FXML private TableColumn<Patient, Integer> IDPersonnelColmn;
+    @FXML
+    private TableView<Patient> table; // TableView to display patient data
+    @FXML
+    private TableColumn<Patient, Integer> IDColmn; // Column for patient ID
+    @FXML
+    private TableColumn<Patient, String> NomColmn; // Column for patient name
+    @FXML
+    private TableColumn<Patient, LocalDate> DateNaissanceColmn; // Column for patient date of birth
+    @FXML
+    private TableColumn<Patient, String> SexeColmn; // Column for patient gender
+    @FXML
+    private TableColumn<Patient, String> SSNColmn; // Column for patient SSN
+    @FXML
+    private TableColumn<Patient, String> AdresseColmn; // Column for patient address
+    @FXML
+    private TableColumn<Patient, String> TelephoneColmn; // Column for patient telephone number
+    @FXML
+    private TableColumn<Patient, String> EmailColmn; // Column for patient email
+    @FXML
+    private TableColumn<Patient, String> TraitementColmn; // Column for patient treatment
+    @FXML
+    private TableColumn<Patient, String> DiagnosticColmn; // Column for patient diagnosis
+    @FXML
+    private TableColumn<Patient, String> StatutColmn; // Column for patient status
+    @FXML
+    private TableColumn<Patient, Integer> IDPersonnelColmn; // Column for personnel ID associated with the patient
 
+    // Text fields for entering patient data
+    @FXML
+    private TextField txtNom;
+    @FXML
+    private DatePicker txtDateNaissance;
+    @FXML
+    private ComboBox<String> cmbSexe;
+    @FXML
+    private TextField txtSSN;
+    @FXML
+    private TextField txtAdresse;
+    @FXML
+    private TextField txtTelephone;
+    @FXML
+    private TextField txtEmail;
+    @FXML
+    private TextField txtTraitement;
+    @FXML
+    private TextField txtDiagnostic;
+    @FXML
+    private ComboBox<String> cmbStatut;
+    @FXML
+    private TextField txtIDPersonnel;
 
-    @FXML private TextField txtNom;
-    @FXML private DatePicker txtDateNaissance;
-    @FXML private ComboBox<String> cmbSexe;
-    @FXML private TextField txtSSN;
-    @FXML private TextField txtAdresse;
-    @FXML private TextField txtTelephone;
-    @FXML private TextField txtEmail;
-    @FXML private TextField txtTraitement;
-    @FXML private TextField txtDiagnostic;
-    @FXML private ComboBox<String> cmbStatut;
-    @FXML private TextField txtIDPersonnel;
+    // Buttons for adding, updating, and deleting patients
+    @FXML
+    private Button btnAdd;
+    @FXML
+    private Button btnUpdate;
+    @FXML
+    private Button btnDelete;
 
-    @FXML private Button btnAdd;
-    @FXML private Button btnUpdate;
-    @FXML private Button btnDelete;
-
+    // Database connection variables
     private Connection con;
     private PreparedStatement pst;
     private ResultSet rs;
 
+    /**
+     * Initializes the controller class.
+     * @param location  The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resources The resources used to localize the root object, or null if the root object was not localized.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        connectDatabase();
+        connectDatabase(); // Establish database connection
         if (table != null) {
-            setupCellValueFactories();
-            loadTableData();
-            initializeComboBoxes();
-            setupRowSelectListener();
+            setupCellValueFactories(); // Setup cell value factories for table columns
+            loadTableData(); // Load data into the table
+            initializeComboBoxes(); // Initialize combo boxes for gender and status
+            setupRowSelectListener(); // Setup listener for table row selection
         } else {
             Logger.getLogger(PatientController.class.getName()).log(Level.SEVERE, "TableView is not initialized");
         }
     }
 
+    /**
+     * Initializes the combo boxes for gender and status.
+     */
     private void initializeComboBoxes() {
         cmbSexe.setItems(FXCollections.observableArrayList("M", "F"));
         cmbStatut.setItems(FXCollections.observableArrayList("Active", "Inactive"));
     }
 
+    /**
+     * Sets up a listener for table row selection.
+     */
     private void setupRowSelectListener() {
         table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -84,6 +127,10 @@ public class PatientController implements Initializable {
         });
     }
 
+    /**
+     * Fills the form fields with selected patient data.
+     * @param patient The selected patient.
+     */
     private void fillFormFields(Patient patient) {
         txtNom.setText(patient.getNom());
         txtDateNaissance.setValue(patient.getDateDeNaissance());
@@ -98,6 +145,9 @@ public class PatientController implements Initializable {
         txtIDPersonnel.setText(Integer.toString(patient.getIdPersonnel()));
     }
 
+    /**
+     * Establishes a connection to the database.
+     */
     private void connectDatabase() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -108,17 +158,16 @@ public class PatientController implements Initializable {
         }
     }
 
+    /**
+     * Handles the logout action.
+     * @param event The action event.
+     */
     @FXML
     private void handleLogout(ActionEvent event) {
         try {
-            // Load the login view
             FXMLLoader loader = new FXMLLoader(getClass().getResource("login-view.fxml"));
             Parent root = loader.load();
-
-            // Get the current stage from the action event triggered by the button
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Set the login scene
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -127,6 +176,9 @@ public class PatientController implements Initializable {
         }
     }
 
+    /**
+     * Sets up cell value factories for table columns.
+     */
     private void setupCellValueFactories() {
         IDColmn.setCellValueFactory(cellData -> cellData.getValue().idProperty().asObject());
         NomColmn.setCellValueFactory(cellData -> cellData.getValue().nomProperty());
@@ -142,6 +194,9 @@ public class PatientController implements Initializable {
         IDPersonnelColmn.setCellValueFactory(cellData -> cellData.getValue().idPersonnelProperty().asObject());
     }
 
+    /**
+     * Loads data into the table from the database.
+     */
     private void loadTableData() {
         ObservableList<Patient> patients = FXCollections.observableArrayList();
         try {
@@ -170,6 +225,10 @@ public class PatientController implements Initializable {
         }
     }
 
+    /**
+     * Shows an alert dialog with the given message.
+     * @param message The message to be displayed.
+     */
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Patient Management");
@@ -178,6 +237,10 @@ public class PatientController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Handles adding a new patient to the database.
+     * @param event The action event.
+     */
     @FXML
     private void Add(ActionEvent event) {
         String sql = "INSERT INTO Patient (Nom, Date_de_Naissance, Sexe, Numero_Securite_Social, Adresse, Numero_Telephone, Email, Traitement_en_Cours, Diagnostic, Statut, ID_Personnel) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -210,6 +273,10 @@ public class PatientController implements Initializable {
         }
     }
 
+    /**
+     * Handles updating an existing patient in the database.
+     * @param event The action event.
+     */
     @FXML
     void Update(ActionEvent event) {
         if (table.getSelectionModel().getSelectedItem() != null) {
@@ -248,6 +315,10 @@ public class PatientController implements Initializable {
         }
     }
 
+    /**
+     * Handles deleting an existing patient from the database.
+     * @param event The action event.
+     */
     @FXML
     void Delete(ActionEvent event) {
         if (table.getSelectionModel().getSelectedItem() != null) {

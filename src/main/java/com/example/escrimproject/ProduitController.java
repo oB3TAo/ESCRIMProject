@@ -24,60 +24,52 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Controller class for managing product data in the application.
+ */
 public class ProduitController implements Initializable {
 
-    @FXML
-    private TableColumn<Produit, String> DDPColmn;
-    @FXML
-    private TableColumn<Produit, String> IDColmn;
-    @FXML
-    private TableColumn<Produit, String> IdCatColmn;
-    @FXML
-    private TableColumn<Produit, String> NomColmn;
-    @FXML
-    private TableColumn<Produit, String> PoidsColmn;
-    @FXML
-    private TableColumn<Produit, String> QuantiteColmn;
-    @FXML
-    private TableColumn<Produit, String> TypeColmn;
-    @FXML
-    private Button btnAdd;
-    @FXML
-    private Button btnDelete;
-    @FXML
-    private Button btnUpdate;
-    @FXML
-    private ComboBox<String> cmbType;
-    @FXML
-    private ComboBox<String> cmbCategory;
-    @FXML
-    private DatePicker dateDDP;
-    @FXML
-    private TableView<Produit> table;
-    @FXML
-    private TextField txtNom;
-    @FXML
-    private TextField txtPoids;
-    @FXML
-    private TextField txtQuantite;
+    @FXML private TableColumn<Produit, String> DDPColmn; // Column for product DDP
+    @FXML private TableColumn<Produit, String> IDColmn; // Column for product ID
+    @FXML private TableColumn<Produit, String> IdCatColmn; // Column for product category ID
+    @FXML private TableColumn<Produit, String> NomColmn; // Column for product name
+    @FXML private TableColumn<Produit, String> PoidsColmn; // Column for product weight
+    @FXML private TableColumn<Produit, String> QuantiteColmn; // Column for product quantity
+    @FXML private TableColumn<Produit, String> TypeColmn; // Column for product type
+    @FXML private Button btnAdd; // Button to add product
+    @FXML private Button btnDelete; // Button to delete product
+    @FXML private Button btnUpdate; // Button to update product
+    @FXML private ComboBox<String> cmbType; // ComboBox for product type
+    @FXML private ComboBox<String> cmbCategory; // ComboBox for product category
+    @FXML private DatePicker dateDDP; // DatePicker for product DDP
+    @FXML private TableView<Produit> table; // TableView to display product data
+    @FXML private TextField txtNom; // TextField for product name
+    @FXML private TextField txtPoids; // TextField for product weight
+    @FXML private TextField txtQuantite; // TextField for product quantity
 
-    private Connection con;
-    private PreparedStatement pst;
+    private Connection con; // Database connection variable
+    private PreparedStatement pst; // Prepared statement for database queries
 
+    /**
+     * Initializes the controller class.
+     * @param url The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param rb  The resources used to localize the root object, or null if the root object was not localized.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Connect();
+        Connect(); // Establish database connection
         if (table != null) {
-            initializeComboBox();
-            table();
+            initializeComboBox(); // Initialize combo boxes for type and category
+            table(); // Load data into the table
             loadCategories(); // Load categories into the ComboBox
+
             // Add listener to cmbType ComboBox
             cmbType.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
                 if ("Medicament".equals(newVal)) {
-                    dateDDP.setDisable(false); // Enable dateDDP TextField
+                    dateDDP.setDisable(false); // Enable dateDDP DatePicker
                     dateDDP.setPromptText("Required");
                 } else {
-                    dateDDP.setDisable(true); // Disable dateDDP TextField
+                    dateDDP.setDisable(true); // Disable dateDDP DatePicker
                     dateDDP.setPromptText(""); // Remove prompt text
                 }
             });
@@ -100,6 +92,8 @@ public class ProduitController implements Initializable {
                     }
                 }
             });
+
+            // Add listener to cmbCategory ComboBox
             cmbCategory.setOnAction(event -> {
                 String selectedCategory = cmbCategory.getValue();
                 if (selectedCategory != null && selectedCategory.equals("Add New Category...")) {
@@ -112,6 +106,10 @@ public class ProduitController implements Initializable {
         }
     }
 
+    /**
+     * Handles adding a new product to the database.
+     * @param event The action event.
+     */
     @FXML
     void Add(ActionEvent event) {
         String nom = txtNom.getText();
@@ -146,6 +144,7 @@ public class ProduitController implements Initializable {
                 pst.setNull(6, Types.DATE);
             }
             pst.executeUpdate();
+
             showAlert("Record Added!");
             table();
 
@@ -156,6 +155,10 @@ public class ProduitController implements Initializable {
         }
     }
 
+    /**
+     * Handles deleting an existing product from the database.
+     * @param event The action event.
+     */
     @FXML
     void Delete(ActionEvent event) {
         Produit selectedProduit = table.getSelectionModel().getSelectedItem();
@@ -175,6 +178,10 @@ public class ProduitController implements Initializable {
         }
     }
 
+    /**
+     * Handles updating an existing product in the database.
+     * @param event The action event.
+     */
     @FXML
     void Update(ActionEvent event) {
         Produit selectedProduit = table.getSelectionModel().getSelectedItem();
@@ -207,6 +214,7 @@ public class ProduitController implements Initializable {
             pst.setInt(6, Integer.parseInt(categorySelection)); // Set the category ID
             pst.setInt(7, selectedProduit.getId());
             pst.executeUpdate();
+
             showAlert("Product updated successfully!");
             table();
         } catch (SQLException ex) {
@@ -215,12 +223,17 @@ public class ProduitController implements Initializable {
         }
     }
 
-
+    /**
+     * Initializes the combo boxes for product type and category.
+     */
     private void initializeComboBox() {
         cmbType.setItems(FXCollections.observableArrayList("Medicament", "Materiel"));
         loadCategories();
     }
 
+    /**
+     * Loads categories into the category ComboBox.
+     */
     public void loadCategories() {
         try {
             if (con == null) {
@@ -246,9 +259,10 @@ public class ProduitController implements Initializable {
         }
     }
 
-
-
-
+    /**
+     * Displays an alert dialog with the given message.
+     * @param message The message to display.
+     */
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Notification");
@@ -257,6 +271,9 @@ public class ProduitController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Establishes a connection to the database.
+     */
     public void Connect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -266,6 +283,10 @@ public class ProduitController implements Initializable {
         }
     }
 
+    /**
+     * Handles the logout action by returning to the login view.
+     * @param event The action event.
+     */
     @FXML
     private void handleLogout(ActionEvent event) {
         try {
@@ -285,13 +306,16 @@ public class ProduitController implements Initializable {
         }
     }
 
+    /**
+     * Sets cell value factories for the table columns.
+     */
     private void setCellValueFactories() {
         IDColmn.setCellValueFactory(f -> f.getValue().idProperty().asString());
         NomColmn.setCellValueFactory(f -> f.getValue().nomProperty());
         PoidsColmn.setCellValueFactory(f -> f.getValue().poidsProperty());
         QuantiteColmn.setCellValueFactory(f -> f.getValue().quantiteProperty());
         TypeColmn.setCellValueFactory(f -> f.getValue().typeProperty());
-        IdCatColmn.setCellValueFactory(f -> f.getValue().categoryIdProperty());
+        //IdCatColmn.setCellValueFactory(f -> f.getValue().categoryIdProperty());
         DDPColmn.setCellValueFactory(f -> {
             if (f.getValue() instanceof Medicament) {
                 Date dateDePeremption = Date.valueOf(((Medicament) f.getValue()).getDateDePeremption());
@@ -311,6 +335,9 @@ public class ProduitController implements Initializable {
         // });
     }
 
+    /**
+     * Loads data into the table from the database.
+     */
     public void table() {
         ObservableList<Produit> produits = FXCollections.observableArrayList();
         try {
@@ -346,6 +373,9 @@ public class ProduitController implements Initializable {
         }
     }
 
+    /**
+     * Clears the input fields.
+     */
     private void clearFields() {
         txtNom.clear();
         txtPoids.clear();
@@ -355,7 +385,9 @@ public class ProduitController implements Initializable {
         dateDDP.getEditor().clear(); // Clear DatePicker editor
     }
 
-
+    /**
+     * Switches to the Category tab.
+     */
     private void switchToCategoryTab() {
         try {
             // Load the Category tab FXML file

@@ -17,38 +17,45 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Controller class for managing personnel data in the application.
+ */
 public class PersonnelController implements Initializable {
 
-    @FXML private TextField txtNom;
-    @FXML private TextField txtEmail;
-    @FXML private TextField txtTelephone;
-    @FXML private TextField txtStatut;
-    @FXML private TextField txtSpecialite;
-    @FXML private TableView<Personnel> table;
-    @FXML private TableColumn<Personnel, String> IDColmn;
-    @FXML private TableColumn<Personnel, String> NomColmn;
-    @FXML private TableColumn<Personnel, String> EmailColmn;
-    @FXML private TableColumn<Personnel, String> TelephoneColmn;
-    @FXML private TableColumn<Personnel, String> StatutColmn;
-    @FXML private TableColumn<Personnel, String> SpecialiteColmn;
-    @FXML private TableColumn<Personnel, String> TypeColmn;
-    @FXML private ComboBox<String> cmbType;
-    @FXML private ComboBox<String> cmbStatut;
-    @FXML private Button btnAdd;
-    @FXML private Button btnUpdate;
-    @FXML private Button btnDelete;
+    @FXML private TextField txtNom; // Text field for personnel name
+    @FXML private TextField txtEmail; // Text field for personnel email
+    @FXML private TextField txtTelephone; // Text field for personnel telephone
+    @FXML private TextField txtStatut; // Text field for personnel status
+    @FXML private TextField txtSpecialite; // Text field for personnel specialty
+    @FXML private TableView<Personnel> table; // TableView to display personnel data
+    @FXML private TableColumn<Personnel, String> IDColmn; // Column for personnel ID
+    @FXML private TableColumn<Personnel, String> NomColmn; // Column for personnel name
+    @FXML private TableColumn<Personnel, String> EmailColmn; // Column for personnel email
+    @FXML private TableColumn<Personnel, String> TelephoneColmn; // Column for personnel telephone
+    @FXML private TableColumn<Personnel, String> StatutColmn; // Column for personnel status
+    @FXML private TableColumn<Personnel, String> SpecialiteColmn; // Column for personnel specialty
+    @FXML private TableColumn<Personnel, String> TypeColmn; // Column for personnel type
+    @FXML private ComboBox<String> cmbType; // ComboBox for personnel type
+    @FXML private ComboBox<String> cmbStatut; // ComboBox for personnel status
+    @FXML private Button btnAdd; // Button to add personnel
+    @FXML private Button btnUpdate; // Button to update personnel
+    @FXML private Button btnDelete; // Button to delete personnel
 
-    private Connection con;
-    private PreparedStatement pst;
-    private int id;
+    private Connection con; // Database connection variable
+    private PreparedStatement pst; // Prepared statement for database queries
+    private int id; // Personnel ID
 
+    /**
+     * Initializes the controller class.
+     * @param url The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param rb  The resources used to localize the root object, or null if the root object was not localized.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        Connect();
+        Connect(); // Establish database connection
         if (table != null) {
-            initializeComboBox();
-            table();
+            initializeComboBox(); // Initialize combo boxes for type and status
+            table(); // Load data into the table
             // Add listener to cmbType ComboBox
             cmbType.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
                 if ("Medecin".equals(newVal)) {
@@ -86,7 +93,10 @@ public class PersonnelController implements Initializable {
         }
     }
 
-
+    /**
+     * Handles the logout action.
+     * @param event The action event.
+     */
     @FXML
     private void handleLogout(ActionEvent event) {
         try {
@@ -106,12 +116,18 @@ public class PersonnelController implements Initializable {
         }
     }
 
-
+    /**
+     * Initializes the combo boxes for personnel type and status.
+     */
     private void initializeComboBox() {
         cmbType.setItems(FXCollections.observableArrayList("Medecin", "Pharmacien", "Logisticien"));
         cmbStatut.setItems(FXCollections.observableArrayList("Active", "Inactive"));
     }
 
+    /**
+     * Handles adding a new personnel to the database.
+     * @param event The action event.
+     */
     @FXML
     void Add(ActionEvent event) {
         String nom = txtNom.getText();
@@ -162,15 +178,9 @@ public class PersonnelController implements Initializable {
         }
     }
 
-
-    private void showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Personnel");
-        alert.setHeaderText("Personnel");
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
+    /**
+     * Clears all input fields.
+     */
     private void clearFields() {
         txtNom.clear();
         txtEmail.clear();
@@ -180,6 +190,9 @@ public class PersonnelController implements Initializable {
         cmbType.getSelectionModel().clearSelection();
     }
 
+    /**
+     * Loads data into the table from the database.
+     */
     public void table() {
         ObservableList<Personnel> personnels = FXCollections.observableArrayList();
         try {
@@ -218,6 +231,9 @@ public class PersonnelController implements Initializable {
         }
     }
 
+    /**
+     * Sets cell value factories for the table columns.
+     */
     private void setCellValueFactories() {
         IDColmn.setCellValueFactory(f -> f.getValue().idProperty().asString());
         NomColmn.setCellValueFactory(f -> f.getValue().nomProperty());
@@ -234,6 +250,10 @@ public class PersonnelController implements Initializable {
         });
     }
 
+    /**
+     * Handles deleting an existing personnel from the database.
+     * @param event The action event.
+     */
     @FXML
     void Delete(ActionEvent event) {
         Personnel selectedItem = table.getSelectionModel().getSelectedItem();
@@ -256,6 +276,10 @@ public class PersonnelController implements Initializable {
         }
     }
 
+    /**
+     * Handles updating an existing personnel in the database.
+     * @param event The action event.
+     */
     @FXML
     void Update(ActionEvent event) {
         Personnel selectedItem = table.getSelectionModel().getSelectedItem();
@@ -286,6 +310,9 @@ public class PersonnelController implements Initializable {
         }
     }
 
+    /**
+     * Establishes a connection to the database.
+     */
     public void Connect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -294,5 +321,17 @@ public class PersonnelController implements Initializable {
             Logger.getLogger(PersonnelController.class.getName()).log(Level.SEVERE, null, ex);
             showAlert("Error: " + ex.getMessage());
         }
+    }
+
+    /**
+     * Displays an alert dialog with the given message.
+     * @param message The message to display.
+     */
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Personnel");
+        alert.setHeaderText("Personnel");
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

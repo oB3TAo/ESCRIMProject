@@ -16,27 +16,30 @@ import java.sql.*;
 
 public class LoginController {
 
+    // FXML elements
     @FXML
-    private TextField usernameField;
-
+    private TextField usernameField; // TextField for entering username
     @FXML
-    private PasswordField passwordField;
+    private PasswordField passwordField; // PasswordField for entering password
 
-    private Connection connection;
+    private Connection connection; // Connection object for database access
 
+    // Initialize method called after loading the FXML file
     @FXML
     private void initialize() {
         try {
+            // Establish database connection
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/escrim", "root", "MySQL_B3TA90");
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Log any errors encountered during database connection
         }
     }
 
+    // Handle login button click event
     @FXML
     private void handleLoginButtonClick(ActionEvent event) throws SQLException {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
+        String username = usernameField.getText(); // Get username from text field
+        String password = passwordField.getText(); // Get password from password field
 
         // Check if the username and password are valid
         if (isValidUser(username, password)) {
@@ -44,30 +47,31 @@ public class LoginController {
             String role = getUserRole(username);
 
             // Load the appropriate tab based on the user's role
-            if ("Medecin".equals(role)) {
-                loadMedecinTab();
-            } else if ("Logisticien".equals(role)) {
-                loadLogisticienTab();
-            } else if ("Pharmacien".equals(role)){
-                loadPharmacienTab();
-            }else if ("Admin".equals(role)) {
-                loadAdminTab();
-            } else {
-                // Display an error message if the role is not recognized
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Invalid Role");
-                alert.setContentText("Your role is not recognized.");
-                alert.showAndWait();
+            switch (role) {
+                case "Medecin":
+                    loadMedecinTab();
+                    break;
+                case "Logisticien":
+                    loadLogisticienTab();
+                    break;
+                case "Pharmacien":
+                    loadPharmacienTab();
+                    break;
+                case "Admin":
+                    loadAdminTab();
+                    break;
+                default:
+                    // Display an error message if the role is not recognized
+                    showAlert(Alert.AlertType.ERROR, "Invalid Role", "Your role is not recognized.");
+                    break;
             }
         } else {
-            // Display an error message
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText("Invalid username or password");
-            alert.setContentText("Please try again.");
-            alert.showAndWait();
+            // Display an error message for invalid username or password
+            showAlert(Alert.AlertType.ERROR, "Invalid username or password", "Please try again.");
         }
     }
 
+    // Method to get the role of the user from the database
     private String getUserRole(String username) throws SQLException {
         String query = "SELECT Role FROM User WHERE Username = ?";
         PreparedStatement statement = connection.prepareStatement(query);
@@ -75,60 +79,45 @@ public class LoginController {
         ResultSet resultSet = statement.executeQuery();
 
         if (resultSet.next()) {
-            return resultSet.getString("Role");
+            return resultSet.getString("Role"); // Return the role if found
         } else {
-            return null; // User not found
+            return null; // Return null if user not found
         }
     }
 
+    // Method to load the medecin tab
     private void loadMedecinTab() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("medecin_view.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setScene(new Scene(root, 900, 600));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        loadTab("medecin_view.fxml", 900, 600);
     }
 
+    // Method to load the logisticien tab
     private void loadLogisticienTab() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("logisticien_view.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setScene(new Scene(root, 900, 530));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        loadTab("logisticien_view.fxml", 900, 530);
     }
 
+    // Method to load the pharmacien tab
     private void loadPharmacienTab() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("pharmacien_view.fxml"));
-            Parent root = loader.load();
-            Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setScene(new Scene(root, 700, 507));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        loadTab("pharmacien_view.fxml", 700, 507);
     }
 
+    // Method to load the admin tab
     private void loadAdminTab() {
+        loadTab("admin_view.fxml", 802, 530);
+    }
+
+    // Method to load a specific tab
+    private void loadTab(String fxmlPath, int width, int height) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("admin_view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             Parent root = loader.load();
             Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setScene(new Scene(root, 802, 530));
-            // Pass any necessary data to the controller of the admin tab if needed
-            // AdminController controller = loader.getController();
-            // controller.initData(...);
+            stage.setScene(new Scene(root, width, height));
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Log any errors encountered while loading the tab
         }
     }
 
-
+    // Method to check if the username and password are valid
     private boolean isValidUser(String username, String password) throws SQLException {
         String query = "SELECT * FROM User WHERE Username = ?";
         PreparedStatement statement = connection.prepareStatement(query);
@@ -137,9 +126,17 @@ public class LoginController {
 
         if (resultSet.next()) {
             String storedPassword = resultSet.getString("Password");
-            return storedPassword.equals(password);
+            return storedPassword.equals(password); // Return true if passwords match
         } else {
-            return false;
+            return false; // Return false if user not found
         }
+    }
+
+    // Method to show an alert dialog
+    private void showAlert(Alert.AlertType type, String header, String content) {
+        Alert alert = new Alert(type);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }

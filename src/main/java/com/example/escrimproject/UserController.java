@@ -84,6 +84,9 @@ public class UserController implements Initializable {
         }
     }
 
+    /**
+     * Initializes the ComboBox with personnel IDs.
+     */
     private void initializeComboBox() {
         ObservableList<String> personnelIds = FXCollections.observableArrayList();
         try {
@@ -192,6 +195,10 @@ public class UserController implements Initializable {
         }
     }
 
+    /**
+     * Displays an alert dialog with the given message.
+     * @param message The message to display.
+     */
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("User");
@@ -200,12 +207,18 @@ public class UserController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Clears the input fields.
+     */
     private void clearFields() {
         txtUsername.clear();
         txtPassword.clear();
         txtRole.clear();
     }
 
+    /**
+     * Loads data into the table from the database.
+     */
     public void table() {
         ObservableList<User> users = FXCollections.observableArrayList();
         try {
@@ -226,13 +239,19 @@ public class UserController implements Initializable {
             showAlert("Error loading data: " + e.getMessage());
         }
     }
+
+    /**
+     * Sets cell value factories for the table columns.
+     */
     private void setCellValueFactories() {
         UsernameColmn.setCellValueFactory(f -> f.getValue().usernameProperty());
         PasswordColmn.setCellValueFactory(f -> f.getValue().passwordProperty());
         TypeColmn.setCellValueFactory(f -> f.getValue().roleProperty());
     }
 
-
+    /**
+     * Establishes a connection to the database.
+     */
     public void Connect() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
