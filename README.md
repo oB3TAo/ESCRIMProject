@@ -1,7 +1,3 @@
-Voici une version améliorée du README pour le projet ESCRIM, en utilisant les informations supplémentaires issues de la présentation orale :
-
----
-
 # ESCRIM: Logiciel de Gestion pour Hôpital de Campagne
 
 ## Contexte
